@@ -1,0 +1,16 @@
+.form-control {
+    display: block;
+    margin: 5px;
+}
+
+.login-link {
+    font-weight: bold;
+}
+
+.content-signUp {
+    padding: 12px;
+}
+
+.content {
+    padding: 35px;
+}

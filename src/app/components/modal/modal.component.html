@@ -1,0 +1,37 @@
+<div class="button-position">
+    <button mat-raised-button color="primary" (click)="[open(content),addNewQuestion()]" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Add new question</button>
+</div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Enter a question</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form novalidate [formGroup]="myform" (ngSubmit)="onSubmit()">
+
+            <div class="questions" *ngFor="let question of questions; let index = index">
+                <mat-form-field class="form-control">
+                    <mat-label>Enter a possible answer</mat-label>
+                    <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" [(ngModel)]="question.possibleAnswer[0]"></textarea>
+                    <mat-error *ngIf="optionOne?.errors?.['required']">Add title!</mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="form-control">
+                    <mat-label>Enter a possible answer</mat-label>
+                    <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" [(ngModel)]="question.possibleAnswer[1]"></textarea>
+                    <mat-error *ngIf="optionTwo?.errors?.['required']">Add title!</mat-error>
+                </mat-form-field>
+            </div>
+            <pre>{{myform.value | json}}</pre>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+
+    </div>
+</ng-template>
+
+<hr>
+
+<pre>{{ closeResult }}</pre>

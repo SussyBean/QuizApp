@@ -1,0 +1,19 @@
+.form-control {
+    display: block;
+    margin: 5px;
+}
+
+.form-footer {
+    margin: 12px;
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+}
+
+.sign-up-link {
+    font-weight: bold;
+}
+
+.content {
+    padding: 100px;
+}

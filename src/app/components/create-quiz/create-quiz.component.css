@@ -1,0 +1,81 @@
+.content {
+    padding: 32px;
+}
+
+.form-control {
+    display: block;
+    margin: 10px;
+    width: 94%;
+}
+
+.beginning-text {
+    padding: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.options {
+    padding: 15px;
+    border-radius: 16px;
+    display: block;
+    background: whitesmoke;
+    width: 30%;
+}
+
+.center-options {
+    justify-content: center;
+}
+
+.showInputField {
+    width: 20%;
+    margin: 15px;
+}
+
+.button-position {
+    position: absolute;
+    right: 0;
+    margin: 20px;
+}
+
+.button-positionAddOption {
+    position: absolute;
+    right: 0;
+    margin: 25px;
+    bottom: 20px;
+}
+
+.formContainer {
+    align-items: center;
+    width: 20%;
+    margin: 20px;
+    display: flex;
+    flex-direction: column
+}
+
+.form-options {
+    display: block;
+    min-width: 150px;
+    max-width: 500px;
+    width: 50%;
+    margin: 15px;
+}
+
+.form-questionTitle {
+    min-width: 150px;
+    max-width: 500px;
+    width: 70%;
+}
+
+.form-Options_Control {
+    border-radius: 16px;
+    display: block;
+    width: 94%;
+}
+
+.spaceBetween {
+    padding: 150px;
+}
+
+.borderQuestion {
+    border-radius: 16px;
+}

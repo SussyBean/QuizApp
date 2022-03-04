@@ -1,0 +1,52 @@
+<div class="content">
+
+    <div class="form-container mat-elevation-z5 content">
+
+        <div class="center margin-top">
+            <h1>Sign up</h1>
+        </div>
+        <form class="form" [formGroup]="registerForm" (ngSubmit)="submit()">
+
+            <mat-form-field class="form-control">
+                <mat-label>First Name</mat-label>
+                <input matInput placeholder="First Name" formControlName="firstName" type="text">
+                <mat-error *ngIf="firstName?.errors?.['required']">First name is required</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="form-control">
+                <mat-label>Email</mat-label>
+                <input matInput placeHolder="Email address" formControlName="email" type="text">
+                <mat-error *ngIf="email?.errors?.['required']">Email is required</mat-error>
+                <mat-error *ngIf="email?.errors?.['email']">Please enter a correct e-mail</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="form-control">
+                <mat-label>Password</mat-label>
+                <input matInput placeHolder="Password" formControlName="password" type="password">
+                <mat-error *ngIf="password?.errors?.['required']">Password is required</mat-error>
+                <mat-error *ngIf="password?.errors?.['minlength']">Password must be over 6 characters</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="form-control">
+                <mat-label>Confirm password</mat-label>
+                <input matInput placeHolder="Password" formControlName="confirmPassword" type="password">
+                <mat-error *ngIf="confirmPassword?.errors?.['required']">Password is required</mat-error>
+                <!-- <mat-error *ngIf="registerForm.hasError('notSame')">Password and confirm don't match</mat-error> -->
+            </mat-form-field>
+            <mat-error *ngIf="registerForm.errors?.['passwordsDontMatch']">
+                Password should match!
+            </mat-error>
+
+
+
+            <div class="center margin-top">
+                <button mat-raised-button color="primary" type="submit">Sign up</button>
+            </div>
+            <div class="center margin-top ">
+                <span>You already have an account? <a class="login-link" routerLink="/login">Login</a></span>
+            </div>
+
+        </form>
+    </div>
+
+</div>

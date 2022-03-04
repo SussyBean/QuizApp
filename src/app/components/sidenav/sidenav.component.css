@@ -1,0 +1,37 @@
+.form {
+    color: white;
+}
+
+.form-icon {
+    margin-right: 8px;
+}
+
+.logo {
+    text-align: center;
+    padding: 2.6rem 1rem;
+}
+
+img {
+    width: 200px;
+}
+
+mat-divider {
+    margin-top: 16px;
+    margin-bottom: 16px;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.mat-list-item {
+    font-size: 1rem;
+    height: 44px !important;
+    margin-bottom: 4px;
+}
+
+:hover.mat-list-item {
+    background: rgb(137, 128, 221) !important;
+}
+
+.list-item-active {
+    font-weight: bolder;
+    color: rgb(0, 0, 0) !important;
+}

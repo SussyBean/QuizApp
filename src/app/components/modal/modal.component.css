@@ -1,0 +1,11 @@
+.button-position {
+    position: absolute;
+    right: 0;
+    margin: 20px;
+}
+
+.form-control {
+    display: block;
+    margin: 10px;
+    width: 94%;
+}

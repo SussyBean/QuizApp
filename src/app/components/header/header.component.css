@@ -1,0 +1,12 @@
+mat-toolbar {
+    justify-content: end;
+    background-color: rgb(111, 202, 195);
+}
+
+.content {
+    padding: 32px;
+}
+
+li {
+    list-style: none;
+}
