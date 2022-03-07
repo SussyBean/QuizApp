@@ -22,16 +22,17 @@
 
             <mat-form-field class="form-control">
                 <mat-label>Password</mat-label>
-                <input matInput placeHolder="Password" formControlName="password" type="password">
+                <input matInput placeHolder="Password" formControlName="password" [type]="showPassword ? 'password' : 'text'">
+                <mat-icon matSuffix (click)="togglePasswordVisibility()">{{showPassword?'visibility_off':'visibility'}}</mat-icon>
                 <mat-error *ngIf="password?.errors?.['required']">Password is required</mat-error>
                 <mat-error *ngIf="password?.errors?.['minlength']">Password must be over 6 characters</mat-error>
             </mat-form-field>
 
             <mat-form-field class="form-control">
                 <mat-label>Confirm password</mat-label>
-                <input matInput placeHolder="Password" formControlName="confirmPassword" type="password">
+                <input matInput placeHolder="Password" formControlName="confirmPassword" [type]="showPasswordConfirm ? 'password' : 'text'">
+                <mat-icon matSuffix (click)="togglePasswordConfirmVisibility()">{{showPasswordConfirm?'visibility_off':'visibility'}}</mat-icon>
                 <mat-error *ngIf="confirmPassword?.errors?.['required']">Password is required</mat-error>
-                <!-- <mat-error *ngIf="registerForm.hasError('notSame')">Password and confirm don't match</mat-error> -->
             </mat-form-field>
             <mat-error *ngIf="registerForm.errors?.['passwordsDontMatch']">
                 Password should match!
@@ -40,7 +41,7 @@
 
 
             <div class="center margin-top">
-                <button mat-raised-button color="primary" type="submit">Sign up</button>
+                <button mat-raised-button color="primary" type="submit" [disabled]="!registerForm.valid">Sign up</button>
             </div>
             <div class="center margin-top ">
                 <span>You already have an account? <a class="login-link" routerLink="/login">Login</a></span>

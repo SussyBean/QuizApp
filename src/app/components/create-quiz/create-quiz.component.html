@@ -1,14 +1,14 @@
 <div class="content">
 
     <div class="beginning-text center">
-        Here you can create your own quiz!
+        Тук можеш да създадеш свой собствен тест
     </div>
 
     <div class="button-position">
-        <button mat-raised-button color="primary" (click)="addNewQuestion()">Add new question</button>
+        <button mat-raised-button color="primary" (click)="addNewQuestion()">Добави въпрос</button>
     </div>
     <div class="flex">
-        <div class="options">
+        <div class="options center">
             <form [formGroup]="createQuizForm">
                 <mat-form-field class="form-control">
                     <mat-chip-list #chipList aria-label="Language selection">
@@ -16,7 +16,7 @@
                             {{language}}
                             <button matChipRemove> <mat-icon>cancel</mat-icon> </button>
                         </mat-chip>
-                        <input placeholder="Choose a given language or type yours:" #languageInput [formControl]="languageCtrl" [matAutocomplete]="auto" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add($event)">
+                        <input placeholder="Избери език или въведи твой (задължително):" #languageInput [formControl]="languageCtrl" [matAutocomplete]="auto" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add($event)">
                     </mat-chip-list>
                     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
                         <mat-option *ngFor="let language of filteredLanguages | async" [value]="language">
@@ -26,81 +26,62 @@
                 </mat-form-field>
 
                 <mat-form-field class="form-control">
-                    <mat-label>Enter the title of your quiz:</mat-label>
+                    <mat-label>Въведи име на теста (задължително):</mat-label>
                     <input matInput type="text" placeholder="Title of quiz" formControlName="titleOfQuiz">
-                    <mat-error *ngIf="titleOfQuiz?.errors?.['required']">Enter a title for your quiz!</mat-error>
+                    <mat-error *ngIf="titleOfQuiz?.errors?.['required']">Въведи име на теста!</mat-error>
                 </mat-form-field>
 
                 <mat-form-field class="form-control">
-                    <mat-label>Enter a description of your quiz:</mat-label>
-                    <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" placeholder="Description of quiz" formControlName="description"></textarea>
-                    <mat-error *ngIf="description?.errors?.['required']">Write a description for your quiz!</mat-error>
+                    <mat-label>Въведи описание на теста:</mat-label>
+                    <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" placeholder="Description of quiz"></textarea>
                 </mat-form-field>
             </form>
         </div>
 
         <div class="spaceBetween"></div>
 
+
         <div class="questions" *ngFor="let question of questions; let index = index">
             <div class="center">
                 <div class="form-questionTitle">
                     <mat-form-field class="form-control">
-                        <mat-label class="text-center">Enter a question</mat-label>
-                        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" [(ngModel)]="question.title" [formControl]="titleCtrl"></textarea>
-                        <mat-error *ngIf="titleCtrl?.errors?.['required']">Add title!</mat-error>
+                        <mat-label class="text-center">Въведи въпрос</mat-label>
+                        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" [(ngModel)]="question.title"></textarea>
                     </mat-form-field>
-
                 </div>
             </div>
 
             <div class="center">
                 <div class="formContainer">
+                    <mat-form-field class="form-control">
+                        <mat-label>Въведи опция</mat-label>
+                        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" [(ngModel)]="question.possibleAnswer[0]"></textarea>
+                    </mat-form-field>
 
-                    <form [formGroup]="createQuestionFirstPairOptions">
-                        <mat-form-field class="form-control">
-                            <mat-label>Enter a possible answer</mat-label>
-                            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" [(ngModel)]="question.possibleAnswer[0]" formControlName="optionOne"></textarea>
-                            <mat-error *ngIf="optionOne?.errors?.['required']">Add title!</mat-error>
-                        </mat-form-field>
-
-                        <mat-form-field class="form-control">
-                            <mat-label>Enter a possible answer</mat-label>
-                            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" [(ngModel)]="question.possibleAnswer[1]" formControlName="optionTwo"></textarea>
-                            <mat-error *ngIf="optionTwo?.errors?.['required']">Add title!</mat-error>
-                        </mat-form-field>
-                    </form>
-
+                    <mat-form-field class="form-control">
+                        <mat-label>Въведи опция</mat-label>
+                        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" [(ngModel)]="question.possibleAnswer[1]"></textarea>
+                    </mat-form-field>
                 </div>
 
                 <div class="formContainer">
+                    <mat-form-field class="form-control">
+                        <mat-label>Въведи опция</mat-label>
+                        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" [(ngModel)]="question.possibleAnswer[2]"></textarea>
+                    </mat-form-field>
 
-                    <form [formGroup]="createQuestionSecondPairOptions">
-                        <mat-form-field class="form-control">
-                            <mat-label>Enter a possible answer</mat-label>
-                            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" [(ngModel)]="question.possibleAnswer[2]" formControlName="optionThree"></textarea>
-                            <mat-error *ngIf="optionThree?.errors?.['required']">Add title!</mat-error>
-                        </mat-form-field>
-
-                        <mat-form-field class="form-control">
-                            <mat-label>Enter a possible answer</mat-label>
-                            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" [(ngModel)]="question.possibleAnswer[3]" formControlName="optionFour"></textarea>
-                            <mat-error *ngIf="optionFour?.errors?.['required']">Add title!</mat-error>
-                        </mat-form-field>
-                    </form>
-
-
+                    <mat-form-field class="form-control">
+                        <mat-label>Въведи опция</mat-label>
+                        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" [(ngModel)]="question.possibleAnswer[3]"></textarea>
+                    </mat-form-field>
                 </div>
-
-
-                <button class="button-position" mat-raised-button color="primary" (click)="deleteQuestion(index)">Remove question</button>
-
+                <button class="button-position" mat-raised-button color="primary" (click)="deleteQuestion(index)">Премахни въпроса</button>
             </div>
-
         </div>
 
 
         <div class="spaceBetween"></div>
 
         <div class="center">
-            <button mat-raised-button color="primary" (click)="saveQuiz()">Save the quiz!</button>
+            <button mat-raised-button color="primary" (click)="saveQuiz()">Запази теста</button>
         </div>

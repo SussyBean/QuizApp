@@ -1,4 +1,4 @@
-<div class="button-position">
+<!-- <div class="button-position">
     <button mat-raised-button color="primary" (click)="[open(content),addNewQuestion()]" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Add new question</button>
 </div>
 
@@ -8,30 +8,58 @@
         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
-        <form novalidate [formGroup]="myform" (ngSubmit)="onSubmit()">
-
-            <div class="questions" *ngFor="let question of questions; let index = index">
-                <mat-form-field class="form-control">
-                    <mat-label>Enter a possible answer</mat-label>
-                    <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" [(ngModel)]="question.possibleAnswer[0]"></textarea>
-                    <mat-error *ngIf="optionOne?.errors?.['required']">Add title!</mat-error>
-                </mat-form-field>
-
-                <mat-form-field class="form-control">
-                    <mat-label>Enter a possible answer</mat-label>
-                    <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" [(ngModel)]="question.possibleAnswer[1]"></textarea>
-                    <mat-error *ngIf="optionTwo?.errors?.['required']">Add title!</mat-error>
-                </mat-form-field>
-            </div>
-            <pre>{{myform.value | json}}</pre>
-        </form>
+        <div class="questions" *ngFor="let question of questions; let index = index">
+            <mat-form-field class="form-control">
+                <mat-label>Enter a possible answer</mat-label>
+                <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" [(ngModel)]="question.possibleAnswer[0]"></textarea>
+            </mat-form-field>
+            <mat-form-field class="form-control">
+                <mat-label>Enter a possible answer</mat-label>
+                <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" [(ngModel)]="question.possibleAnswer[1]"></textarea>
+            </mat-form-field>
+        </div>
+        <pre>{{myform.value | json}}</pre>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
-
     </div>
 </ng-template>
 
 <hr>
 
-<pre>{{ closeResult }}</pre>
+<pre>{{ closeResult }}</pre> -->
+
+
+<div class="container py-5">
+
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Launch demo modal
+  </button>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Demo Form</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="myForm">
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>

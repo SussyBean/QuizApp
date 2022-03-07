@@ -31,7 +31,28 @@ mat-divider {
     background: rgb(137, 128, 221) !important;
 }
 
+.mat-tree-node {
+    background-color: rgb(93, 160, 172) !important;
+    border-color: rgb(93, 160, 172) !important;
+    font-size: 1rem;
+    height: 44px !important;
+}
+
+.mat-tree-node:hover {
+    background: rgb(137, 128, 221) !important;
+    font-weight: bolder;
+    color: rgb(0, 0, 0) !important;
+}
+
+.form-icon-links {
+    margin: 15px;
+}
+
 .list-item-active {
     font-weight: bolder;
     color: rgb(0, 0, 0) !important;
+}
+
+.linksDesign {
+    width: 20%;
 }

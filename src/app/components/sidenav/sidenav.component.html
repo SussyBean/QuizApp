@@ -6,17 +6,47 @@
 
 
     <a mat-list-item routerLink="/home" routerLinkActive="list-item-active">
-        <mat-icon class="form-icon form">home</mat-icon>Home</a>
+        <mat-icon class="form-icon form">home</mat-icon>Начало</a>
 
     <a mat-list-item routerLink="/createQuiz" routerLinkActive="list-item-active">
-        <mat-icon class="form-icon form">build icon</mat-icon>Create Quiz</a>
+        <mat-icon class="form-icon form">build icon</mat-icon>Създай тест</a>
+
+    <a mat-list-item routerLink="/solveQuiz" routerLinkActive="list-item-active">
+        <mat-icon class="form-icon form">poll icon</mat-icon>Реши тест</a>
+
+
+
+    <mat-tree mat-list-item [dataSource]="dataSource" [treeControl]="treeControl">
+        <!-- This is the tree node template for leaf nodes -->
+        <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+            <!-- use a disabled button to provide padding for tree leaf -->
+            <button mat-icon-button disabled></button>
+            <a class="linksDesign center" mat-list-item (click)="navigateToPage(node.name)" routerLinkActive="list-item-active">
+                <mat-icon class="form-icon form">poll icon</mat-icon>
+                {{node.name}}</a>
+
+
+
+        </mat-tree-node>
+        <!-- This is the tree node template for expandable nodes -->
+        <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
+            <mat-icon class="form-icon-links form">school icon</mat-icon>
+            <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.name">
+              <mat-icon class="mat-icon-rtl-mirror">
+                {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+              </mat-icon>
+            </button> {{node.name}}
+        </mat-tree-node>
+
+    </mat-tree>
 
     <a mat-list-item routerLink="/info" routerLinkActive="list-item-active">
-        <mat-icon class="form-icon form">info</mat-icon>About</a>
+        <mat-icon class="form-icon form">info</mat-icon>Информация</a>
 
     <mat-divider></mat-divider>
 
     <a mat-list-item routerLink="/about" routerLinkActive="list-item-active">
-        <mat-icon class="form-icon form">help</mat-icon>Help</a>
+        <mat-icon class="form-icon form">help</mat-icon>Помощ</a>
+
 
 </mat-nav-list>

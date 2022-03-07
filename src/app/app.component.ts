@@ -13,8 +13,6 @@ import { HotToastService } from '@ngneat/hot-toast';
 })
 export class AppComponent {
 
-
-
   sideBarOpen=true;
   @ViewChild(MatSidenav)
   sidenav!:MatSidenav

@@ -3,6 +3,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { HotToastService } from '@ngneat/hot-toast';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { UserService } from 'src/app/users.service';
 
 @Component({
   selector: 'app-header',
@@ -14,7 +15,10 @@ export class HeaderComponent implements OnInit {
   @Output() toggleSidebarForMe: EventEmitter<any> = new EventEmitter();
   title: string = 'Programmer Bg';
 
-  constructor(public authService: AuthenticationService,private router: Router,private observer:BreakpointObserver,private toast:HotToastService){
+
+       user$=this.usersService.currentUserProfile$;
+
+  constructor(private authService: AuthenticationService,private router: Router,private observer:BreakpointObserver,private toast:HotToastService,private usersService:UserService){
   }
 
   onLogout(){

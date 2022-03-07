@@ -17,6 +17,7 @@ import { map, startWith, switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { saveAs } from 'file-saver';
+import { stringify } from 'querystring';
 
 export function numberOfQuestionsValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -53,16 +54,17 @@ export class CreateQuizComponent implements OnInit {
   numberOfQuestionsCtrl = new FormControl('', [Validators.required]);
   filteredLanguages!: Observable<string[]>;
   languages: string[] = [];
-  additionalInfoQuiz: string [] =[];
+  additionalInfoQuiz: Blob [] =[];
+  containsInfo = false;
   allProgrammingLanguages: string[] = [
     'Java',
     'C#',
     'C++',
-    'Python',
-    'JavaScript',
+    'JavaScript'
   ];
   autoCompleteCtrl = new FormControl('', [Validators.required]);
   row = document.createElement('div');
+  index=-1;
 
   questions: Question[] = [];
 
@@ -71,8 +73,7 @@ export class CreateQuizComponent implements OnInit {
 
   createQuizForm!: FormGroup;
   createQuestionTitle!: FormGroup;
-  createQuestionFirstPairOptions!: FormGroup;
-  createQuestionSecondPairOptions!: FormGroup;
+  createQuestionDetails!: FormGroup;
 
 
   ngOnInit(): void {
@@ -80,18 +81,14 @@ export class CreateQuizComponent implements OnInit {
       {
         autoComplete: new FormControl('', [Validators.required]),
         titleOfQuiz: new FormControl('', [Validators.required]),
-        description: new FormControl('', [Validators.required]),
       },
       { validators: numberOfQuestionsValidator() }
     );
 
-    this.createQuestionFirstPairOptions = this.fb.group({
+    this.createQuestionDetails = this.fb.group({
+      titleOfQuestion: new FormControl('',[Validators.required]),
       optionOne: new FormControl('',[Validators.required]),
-      optionTwo: new FormControl('',[Validators.required])
-    });
-
-
-    this.createQuestionSecondPairOptions = this.fb.group({
+      optionTwo: new FormControl('',[Validators.required]),
       optionThree: new FormControl('',[Validators.required]),
       optionFour: new FormControl('',[Validators.required])
     });
@@ -155,10 +152,6 @@ export class CreateQuizComponent implements OnInit {
     return this.createQuizForm.get('numberOfQuestions');
   }
 
-  get description() {
-    return this.createQuizForm.get('description');
-  }
-
   get autoComplete() {
     return this.createQuizForm.get('autoComplete');
   }
@@ -168,17 +161,21 @@ export class CreateQuizComponent implements OnInit {
   }
 
   get optionOne(){
-    return this.createQuestionFirstPairOptions.get('optionOne');
+    return this.createQuestionDetails.get('optionOne');
   }
 
   get optionTwo(){
-    return this.createQuestionFirstPairOptions.get('optionTwo');
+    return this.createQuestionDetails.get('optionTwo');
   }
   get optionThree(){
-    return this.createQuestionSecondPairOptions.get('optionThree');
+    return this.createQuestionDetails.get('optionThree');
   }
   get optionFour(){
-    return this.createQuestionSecondPairOptions.get('optionFour');
+    return this.createQuestionDetails.get('optionFour');
+  }
+
+  get titleOfQuestion(){
+    return this.createQuestionDetails.get('titleOfQuestion')
   }
 
 
@@ -188,17 +185,32 @@ export class CreateQuizComponent implements OnInit {
       : '';
   }
 
-  saveQuestion(){
-  }
+
 
   addNewQuestion(){
+
+    this.index+=1;
       this.questions.push({
         title: '',
         addOptionalAnswer:false,
         possibleAnswer: ['','','',''],
         rightAnswer: 0,
       });
+   console.log(this.questions.length);
+      this.saveInformationForQuestion;
+
   }
+
+  saveInformationForQuestion(){
+        this.questions.push({
+         title: this.questions[this.index].title,
+         addOptionalAnswer:this.questions[this.index].addOptionalAnswer,
+         possibleAnswer:this.questions[this.index].possibleAnswer,
+         rightAnswer:this.questions[this.index].rightAnswer
+        })
+  }
+
+
 
 
   deleteQuestion(index: number) {
@@ -210,20 +222,9 @@ export class CreateQuizComponent implements OnInit {
       return;
     }
 
-    if(!this.titleCtrl.valid){
-      return;
-    }
-
-    if(!this.createQuestionFirstPairOptions.valid){
-      return;
-    }
-
-    if(!this.createQuestionSecondPairOptions.valid){
-      return;
-    }
-
     const blobQuestions = new Blob([JSON.stringify(this.questions)],{type : 'application/json'});
     const blobLanguages = new Blob([JSON.stringify(this.languages)],{type : 'application/json'});
+
     // const blob = new Blob({questions:this.questions,languages:this})
     saveAs(blobQuestions, 'abc.json');
   }

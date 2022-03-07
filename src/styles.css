@@ -12,11 +12,24 @@ body {
 
 .form-container {
     display: block;
-    max-width: 450px;
+    max-width: 360px;
     margin: auto;
     background: whitesmoke;
     padding: 48px;
     border-radius: 16px;
+}
+
+.form-containerProfile {
+    display: block;
+    max-width: 200px;
+    margin: auto;
+    background: whitesmoke;
+    padding: 48px;
+    border-radius: 16px;
+}
+
+.form-containerProfile mat-form-field {
+    width: 100%;
 }
 
 .form-container mat-form-field {
@@ -39,4 +52,15 @@ body {
 
 .content {
     padding: 32px;
+}
+
+.mat-drawer-inner-container::-webkit-scrollbar {
+    display: none;
+}
+
+.titleMain {
+    padding: 32px;
+    font-weight: bold;
+    font-size: 20px;
+    font-style: italic;
 }

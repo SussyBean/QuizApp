@@ -3,7 +3,9 @@ import { Auth } from '@angular/fire/auth';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HotToastService } from '@ngneat/hot-toast';
+import { switchMap } from 'rxjs';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { UserService } from 'src/app/users.service';
 
 
 export function passwordsMatchValidator():ValidatorFn {
@@ -27,11 +29,23 @@ export function passwordsMatchValidator():ValidatorFn {
 })
 export class RegisterComponent implements OnInit {
 
+  public showPassword: boolean = true;
+  public showPasswordConfirm: boolean = true;
+
+
+  public togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
+  }
+
+  public togglePasswordConfirmVisibility():void{
+    this.showPasswordConfirm= !this.showPasswordConfirm;
+  }
+
   registerForm!: FormGroup;
   firebaseErrorMessage!: string;
 
 
-  constructor(private fb: FormBuilder, private router: Router, private afAuth: Auth,private authService: AuthenticationService,private toast:HotToastService) {
+  constructor(private fb: FormBuilder, private router: Router, private afAuth: Auth,private authService: AuthenticationService,private toast:HotToastService,private usersService:UserService) {
 
     this.firebaseErrorMessage = '';
 
@@ -68,7 +82,9 @@ export class RegisterComponent implements OnInit {
     }
 
     const{firstName,email,password} = this.registerForm.value;
-    this.authService.signup(firstName,email,password)
+    this.authService.signup(email,password).pipe(
+      switchMap(({user : {uid}}) => this.usersService.addUser({uid,email,displayName:firstName})),
+    )
     .pipe(
       this.toast.observe({
         success:'You successfully signed up!',

@@ -3,9 +3,14 @@
     <mat-toolbar-row class="justify-content-between">
 
         <button mat-icon-button (click)="toggleSidebar()"><mat-icon>menu</mat-icon></button>
-        <ng-container *ngIf="authService.currentUser$ |async as user; else loginButton">
+        <ng-container *ngIf="user$ |async as user; else loginButton">
             <button mat-button [matMenuTriggerFor]="userMenu">
-  <mat-icon>account_circle</mat-icon>
+              <img
+              width="30"
+              height="30"
+              class="profile-image-toolbar"
+              [src]="user.photoURL ?? 'assets/img/UserLogo.png'"
+            />
   {{user.displayName}}
   <mat-icon>expand_more</mat-icon>
 </button>
@@ -23,6 +28,6 @@ Login
 </mat-toolbar>
 
 <mat-menu #userMenu="matMenu">
-    <button mat-menu-item (click)="onLogout()">Logout</button>
-    <button mat-menu-item routerLink="/profile">Profile</button>
+    <button mat-menu-item routerLink="/profile"> <mat-icon>account_circle</mat-icon>Profile</button>
+    <button mat-menu-item (click)="onLogout()"> <mat-icon>logout</mat-icon>Logout</button>
 </mat-menu>

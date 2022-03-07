@@ -1,9 +1,10 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, ContentChild, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HotToastService } from '@ngneat/hot-toast';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import {canActivate,redirectUnauthorizedTo,redirectLoggedInTo} from '@angular/fire/auth-guard';
+
 
 
 @Component({
@@ -13,12 +14,19 @@ import {canActivate,redirectUnauthorizedTo,redirectLoggedInTo} from '@angular/fi
 })
 export class LoginComponent implements OnInit {
 
+  public showPassword: boolean = true;
+
+  public togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
+  }
+
   @Output() formData: EventEmitter<{
     email: string;
     password: string;
   }> = new EventEmitter();
 
   loginForm!: FormGroup;
+
 
   constructor(private fb: FormBuilder,private authService: AuthenticationService,private router:Router,private toast:HotToastService){}
 
@@ -48,6 +56,8 @@ export class LoginComponent implements OnInit {
      return;
    }
 
+
+
   const{email,password} = this.loginForm.value;
   console.log(email)
   console.log(password)
@@ -66,3 +76,4 @@ export class LoginComponent implements OnInit {
 
 
 }
+
