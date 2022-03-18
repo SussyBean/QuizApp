@@ -1,3 +1,9 @@
 .content {
     padding: 32px;
 }
+
+.titleStyle {
+    font-size: 25px;
+    font-weight: bolder;
+    font-style: italic;
+}

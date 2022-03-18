@@ -1,3 +1,42 @@
 <div class="center content">
-    This App is about learning new skills!
+    <h1 class="title">Често задавани въпроси</h1>
+</div>
+<div class="text-center">
+    <h1 class="subTitle backGround">Ето и едни от най-задаваните въпроси, предоставени тук</h1>
+</div>
+
+<div class="center">
+    <mat-divider></mat-divider>
+</div>
+
+<div class="spaceBetween"></div>
+<div class="center">
+    <mat-accordion>
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+
+            <mat-expansion-panel-header>
+                <mat-panel-title> Как да създам нов тест?</mat-panel-title>
+            </mat-expansion-panel-header>
+            Отидете на <button mat-raised-button class="buttonDesign" routerLink="/createQuiz">Създай тест</button> за да може да създате ваш личен тест
+
+            <br> <br> <br> С бутона <button mat-raised-button color="primary"><mat-icon>add</mat-icon></button> потребител добавя нов въпрос
+
+            <br> <br> <br> С бутона <button mat-raised-button color="primary"><mat-icon>delete</mat-icon></button> всеки въпрос може да бъде изтрит по всяко време
+
+            <br> <br> <br> С бутона <button mat-raised-button color="primary"><mat-icon>save</mat-icon></button> теста ви се запазва и можете да го решите в <button mat-raised-button class="buttonDesign" routerLink="/solveQuiz">Реши тест</button>
+
+        </mat-expansion-panel>
+
+        <br><br><br>
+
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+                <mat-panel-title>Как да решиш готов тест?</mat-panel-title>
+            </mat-expansion-panel-header>
+
+            Отидете на <button mat-raised-button class="buttonDesign" routerLink="/solveQuiz">Реши тест</button> и изберете един от предоставените тестове
+
+        </mat-expansion-panel>
+
+    </mat-accordion>
 </div>

@@ -2,17 +2,32 @@
     display: flex;
     flex-direction: column;
     height: 100%;
+    background-blend-mode: darken;
 }
 
-mat-drawer {
+.header {
     width: 330px;
     background: rgb(93, 160, 172);
 }
 
 mat-drawer-container {
     height: 100%;
+    background-color: rgb(255, 255, 255);
 }
 
 .flex {
     display: flex;
 }
+
+.fixedPos {
+    position: fixed;
+    z-index: 1;
+}
+
+
+/* .backGroundDarker {
+    /* z-index: 20;
+    opacity: 60%;*/
+
+
+/* } */

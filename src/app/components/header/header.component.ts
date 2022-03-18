@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
   title: string = 'Programmer Bg';
 
 
-       user$=this.usersService.currentUserProfile$;
+ user$=this.usersService.currentUserProfile$;
 
   constructor(private authService: AuthenticationService,private router: Router,private observer:BreakpointObserver,private toast:HotToastService,private usersService:UserService){
   }

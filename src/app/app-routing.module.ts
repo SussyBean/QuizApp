@@ -11,7 +11,7 @@ import { AboutComponent } from './components/about/about.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { CreateQuestionComponent } from './components/create-quiz/create-questions.component';
 import { ModalComponent } from './components/modal/modal.component';
-import { QuizSolveComponent } from './components/quiz-solve/quiz-solve.component';
+import { QuizSolveComponent } from './components/quiz-solve-welcome/quiz-solve.component';
 import { JavaOperatorsStatementsComponent } from './components/programmingInformation/Java/java-operators-statements/java-operators-statements.component';
 import { JavaDataVariablesComponent } from './components/programmingInformation/Java/java-data-variables/java-data-variables.component';
 import { JavaCyclesComponent } from './components/programmingInformation/Java/java-cycles/java-cycles.component';
@@ -21,6 +21,12 @@ import { EasyCalculationsComponent } from './components/programmingInformation/J
 import { ComplicatedConditionsComponent } from './components/programmingInformation/JavaScript/complicated-conditions/complicated-conditions.component';
 import { JavaScriptCyclesComponent } from './components/programmingInformation/JavaScript/java-script-cycles/java-script-cycles.component';
 import { JavascriptFunctionsComponent } from './components/programmingInformation/JavaScript/javascript-functions/javascript-functions.component';
+import { QuizSolveQuestionsComponent } from './components/quiz-solve-questions/quiz-solve-questions.component';
+import { PasswordConfirmComponent } from './components/password-confirm/password-confirm.component';
+import { EmailVerifyComponent } from './components/email-verify/email-verify.component';
+import { EmailConfirmationComponent } from './components/email-confirmation/email-confirmation.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { LandingComponent } from './components/landing/landing.component';
 
 
 const redirectToLogin = () => redirectUnauthorizedTo(['login']);
@@ -30,6 +36,10 @@ import('./features/auth/auth.module').then((m) => m.AuthModule)},
 {path: 'register',component: RegisterComponent, ...canActivate(redirectToHome)},
 {path: 'info',component: InfoComponent},{path: 'about',component: AboutComponent},
 {path:'forgot-password',component:ForgotPasswordComponent},
+{path:'confirm-password',component:PasswordConfirmComponent},
+{path:'verify-email',component:EmailVerifyComponent},
+{path:'reset-password',component:ResetPasswordComponent},
+{path:'email/action',component:EmailConfirmationComponent},
 
 // Java-path
 {path:'java-operators-statements',component:JavaOperatorsStatementsComponent},
@@ -45,20 +55,22 @@ import('./features/auth/auth.module').then((m) => m.AuthModule)},
 {path:'javascript-loops',component:JavaScriptCyclesComponent},
 {path:'javascript-functions',component:JavascriptFunctionsComponent},
 
-
+{path:'landing',component:LandingComponent,...canActivate(redirectToHome)},
 {path:'login',component:LoginComponent,...canActivate(redirectToHome)},
 {path:'home',component:HomeComponent, ...canActivate(redirectToLogin)},
 {path:'createQuiz',component:CreateQuizComponent, ...canActivate(redirectToLogin)},
 {path:'createQuestions',component:CreateQuestionComponent,...canActivate(redirectToLogin)},
-{path:'solveQuiz',component:QuizSolveComponent,...canActivate(redirectToLogin)},
+{path:'quizes',component:QuizSolveComponent,...canActivate(redirectToLogin)},
+{path:'quizes/:id',component:QuizSolveQuestionsComponent,...canActivate(redirectToLogin)},
 {path:'profile',component:ProfileComponent,...canActivate(redirectToLogin)},
 {path:'modal',component:ModalComponent},
-{path: '**',redirectTo: '',pathMatch: 'full'}
+{path: '**',redirectTo: '/landing',pathMatch: 'full'}
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
+
 export class AppRoutingModule {
  }

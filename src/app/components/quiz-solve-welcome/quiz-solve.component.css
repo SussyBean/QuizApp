@@ -1,0 +1,24 @@
+.goodLuck {
+    font-family: cursive;
+    text-align: center;
+    margin: 40px;
+}
+
+.listStyle {
+    list-style-type: none;
+    font-weight: bolder;
+    color: rgb(85, 134, 238);
+    font-size: 19px;
+    text-shadow: 0 0 3px #c7d7e2;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.subTitle {
+    font-weight: bold;
+    font-style: italic;
+    font-size: 14px;
+}

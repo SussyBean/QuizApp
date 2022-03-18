@@ -1,6 +1,13 @@
 mat-toolbar {
-    justify-content: end;
-    background-color: rgb(111, 202, 195);
+    background-color: rgb(245, 245, 245);
+    width: 100%;
+    position: fixed;
+    z-index: 2;
+}
+
+#header-account {
+    position: fixed;
+    right: 0;
 }
 
 .content {
@@ -15,3 +22,13 @@ li {
     border-radius: 100%;
     margin-right: 8px;
 }
+
+.margin {
+    margin-left: 400px;
+}
+
+
+/* .fixedPos {
+    position: fixed;
+    z-index: 1;
+} */

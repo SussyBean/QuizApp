@@ -5,7 +5,7 @@
 .form-control {
     display: block;
     margin: 10px;
-    width: 90%;
+    width: 85%;
 }
 
 .beginning-text {
@@ -18,8 +18,8 @@
     padding: 15px;
     border-radius: 16px;
     display: block;
-    background: whitesmoke;
-    width: 43%;
+    width: 37%;
+    margin-left: 50px;
 }
 
 .center-options {
@@ -31,17 +31,25 @@
     margin: 15px;
 }
 
-.button-position {
+.button-positionRemove {
     position: absolute;
     right: 0;
     margin: 20px;
 }
 
-.button-positionAddOption {
+.button-positionInfo {
     position: absolute;
     right: 0;
-    margin: 25px;
     bottom: 20px;
+    margin-bottom: 100px;
+}
+
+.button-positionInfo:hover {}
+
+.button-position {
+    position: absolute;
+    right: 0;
+    margin: 20px;
 }
 
 .formContainer {
@@ -72,10 +80,21 @@
     width: 94%;
 }
 
-.spaceBetween {
-    padding: 150px;
-}
-
 .borderQuestion {
     border-radius: 16px;
+}
+
+.static {
+    position: fixed;
+}
+
+.checkboxPosition {
+    left: 100%;
+    margin-left: 150px;
+    margin-bottom: 10px;
+    position: sticky;
+}
+
+.mat-checkbox-inner-container-no-side-margin {
+    margin-right: 0;
 }

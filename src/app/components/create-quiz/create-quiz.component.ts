@@ -16,8 +16,9 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { map, startWith, switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import { QuizService } from 'src/app/services/quiz.service';
+import { UserService } from 'src/app/users.service';
 import { saveAs } from 'file-saver';
-import { stringify } from 'querystring';
 
 export function numberOfQuestionsValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -31,12 +32,30 @@ export function numberOfQuestionsValidator(): ValidatorFn {
   };
 }
 
+
+
+
 interface Question {
   title: string;
-  possibleAnswer: string[];
-  addOptionalAnswer:boolean;
-  rightAnswer: number;
+  answers: Answer[];
 }
+
+interface Answer {
+  answer: string;
+ rightAnswer:boolean;
+}
+
+ export function initAnswer(answers?: Partial<Answer>): Answer {
+  const defaults = {
+    answer: '',
+    rightAnswer:false
+  };
+  return {
+    ...defaults,
+    ...answers,
+  };
+}
+
 
 
 @Component({
@@ -48,14 +67,16 @@ export class CreateQuizComponent implements OnInit {
   // title = 'json-file-read-angular';
   // public countryList:{name:string, code:string}[] = countries;
 
+  user$=this.usersService.currentUserProfile$;
+
   separatorKeysCodes: number[] = [ENTER, COMMA];
   languageCtrl = new FormControl();
   titleCtrl = new FormControl('', [Validators.required]);
   numberOfQuestionsCtrl = new FormControl('', [Validators.required]);
   filteredLanguages!: Observable<string[]>;
   languages: string[] = [];
-  additionalInfoQuiz: Blob [] =[];
   containsInfo = false;
+  isDisabled=false;
   allProgrammingLanguages: string[] = [
     'Java',
     'C#',
@@ -81,9 +102,12 @@ export class CreateQuizComponent implements OnInit {
       {
         autoComplete: new FormControl('', [Validators.required]),
         titleOfQuiz: new FormControl('', [Validators.required]),
+        description: new FormControl('',[Validators.required])
       },
       { validators: numberOfQuestionsValidator() }
     );
+
+
 
     this.createQuestionDetails = this.fb.group({
       titleOfQuestion: new FormControl('',[Validators.required]),
@@ -95,7 +119,7 @@ export class CreateQuizComponent implements OnInit {
 
   }
 
-  constructor(private fb: FormBuilder, private router: Router, private el: ElementRef) {
+  constructor(private fb: FormBuilder, private router: Router, private el: ElementRef,private quizService: QuizService,private usersService:UserService) {
     this.filteredLanguages = this.languageCtrl.valueChanges.pipe(
       startWith(null),
       map((language: string | null) =>
@@ -175,7 +199,11 @@ export class CreateQuizComponent implements OnInit {
   }
 
   get titleOfQuestion(){
-    return this.createQuestionDetails.get('titleOfQuestion')
+    return this.createQuestionDetails.get('titleOfQuestion');
+  }
+
+  get description(){
+    return this.createQuizForm.get('description');
   }
 
 
@@ -188,28 +216,12 @@ export class CreateQuizComponent implements OnInit {
 
 
   addNewQuestion(){
-
-    this.index+=1;
       this.questions.push({
         title: '',
-        addOptionalAnswer:false,
-        possibleAnswer: ['','','',''],
-        rightAnswer: 0,
+        answers: [initAnswer(),initAnswer(),initAnswer(),initAnswer()],
       });
    console.log(this.questions.length);
-      this.saveInformationForQuestion;
-
   }
-
-  saveInformationForQuestion(){
-        this.questions.push({
-         title: this.questions[this.index].title,
-         addOptionalAnswer:this.questions[this.index].addOptionalAnswer,
-         possibleAnswer:this.questions[this.index].possibleAnswer,
-         rightAnswer:this.questions[this.index].rightAnswer
-        })
-  }
-
 
 
 
@@ -218,15 +230,41 @@ export class CreateQuizComponent implements OnInit {
   }
 
   saveQuiz(){
+
+    for(let i=0; i<this.questions.length; i++){
+      console.log(this.questions[i].answers[i].rightAnswer);
+  }
     if (!this.createQuizForm.valid) {
       return;
     }
 
-    const blobQuestions = new Blob([JSON.stringify(this.questions)],{type : 'application/json'});
-    const blobLanguages = new Blob([JSON.stringify(this.languages)],{type : 'application/json'});
+    // var blobQuestions = new Blob([JSON.stringify(this.questions)],{type : 'application/json'});
+    // const blobQuizAdditionalInfo = new Blob([JSON.stringify(this.createQuizForm.value)],{type: 'application/json'})
+    // const blobLanguages = new Blob([JSON.stringify(this.languages)],{type : 'application/json'});
 
-    // const blob = new Blob({questions:this.questions,languages:this})
-    saveAs(blobQuestions, 'abc.json');
+    const quiz = [JSON.stringify([this.questions,this.createQuizForm.value,this.languages])];
+    const quizTest = new Blob([JSON.stringify([this.questions,this.createQuizForm.value,this.languages])]);
+
+    console.log(quiz);
+    var fr = new FileReader();
+
+    fr.onload = function(evt) {
+      var res = evt.target?.result;
+  };
+
+  this.usersService.currentUserProfile$.subscribe(
+    (res) => {
+      var uid = res!.uid;
+      this.quizService.addQuiz({uid,quiz})
+    },
+    (err) => console.log(err),
+    () => console.log('done!')
+
+  );
+
+  window.location.href = "/createQuiz"
+
+
   }
 
 }

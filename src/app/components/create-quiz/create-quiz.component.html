@@ -1,87 +1,111 @@
-<div class="content">
+<div class="spaceBetween"></div>
+<div class="beginning-text text-center">
+    Тук можеш да създадеш свой собствен тест
+</div>
+<div class="spaceBetween"></div>
+<ng-container class="center">
+    <div class="button-position center">
+        <button class="button-positionInfo" mat-raised-button color="primary" routerLink="/about">
+            <mat-icon>info</mat-icon></button>
+        <button mat-raised-button color="primary" (click)="addNewQuestion()"><mat-icon>add</mat-icon></button>
+    </div>
+</ng-container>
 
-    <div class="beginning-text center">
-        Тук можеш да създадеш свой собствен тест
+
+
+<div class="options center">
+    <form [formGroup]="createQuizForm">
+        <mat-form-field class="form-control">
+            <mat-chip-list #chipList aria-label="Language selection">
+                <mat-chip *ngFor="let language of languages" (removed)="remove(language)">
+                    {{language}}
+                    <button matChipRemove> <mat-icon>cancel</mat-icon> </button>
+                </mat-chip>
+                <input placeholder="Избери език или въведи твой (задължително):" #languageInput [formControl]="languageCtrl" [matAutocomplete]="auto" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add($event)">
+            </mat-chip-list>
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                <mat-option *ngFor="let language of filteredLanguages | async" [value]="language">
+                    {{language}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-form-field class="form-control">
+            <mat-label>Въведи име на теста (задължително):</mat-label>
+            <input matInput type="text" placeholder="Title of quiz" formControlName="titleOfQuiz">
+            <mat-error *ngIf="titleOfQuiz?.errors?.['required']">Въведи име на теста!</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="form-control">
+            <mat-label>Въведи описание на теста:</mat-label>
+            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" placeholder="Description of quiz" formControlName="description"></textarea>
+            <mat-error *ngIf="description?.errors?.['required']">Въведи име на теста!</mat-error>
+        </mat-form-field>
+
+
+    </form>
+</div>
+
+
+<div class="spaceBetween"></div>
+
+
+<div class="questions" *ngFor="let question of questions; let index = index">
+    <div class="center">
+
+        <div class="form-questionTitle">
+            <mat-form-field class="form-control">
+                <mat-label class="text-center">Въведи въпрос</mat-label>
+                <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" [(ngModel)]="question.title"></textarea>
+                <!-- <mat-error *ngIf="titleOfQuestion?.errors?.['required']">Въведи име на теста!</mat-error> -->
+            </mat-form-field>
+        </div>
     </div>
 
-    <div class="button-position">
-        <button mat-raised-button color="primary" (click)="addNewQuestion()">Добави въпрос</button>
+    <div class="center">
+        <div class="formContainer">
+            <mat-form-field class="form-control">
+                <mat-label>Въведи опция</mat-label>
+                <mat-checkbox [disabled]="isDisabled" class="checkboxPosition" [(ngModel)]="question.answers[0].rightAnswer"></mat-checkbox>
+                <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" [(ngModel)]="question.answers[0].answer"></textarea>
+                <!-- <mat-error *ngIf="optionOne?.errors?.['required']">Въведи име на теста!</mat-error> -->
+            </mat-form-field>
+
+            <mat-form-field class="form-control">
+                <mat-label>Въведи опция</mat-label>
+                <mat-checkbox [disabled]="isDisabled" class="checkboxPosition" [(ngModel)]="question.answers[1].rightAnswer"></mat-checkbox>
+                <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" [(ngModel)]="question.answers[1].answer"></textarea>
+                <!-- <mat-error *ngIf="optionTwo?.errors?.['required']">Въведи име на теста!</mat-error> -->
+            </mat-form-field>
+        </div>
+
+        <div class="formContainer">
+            <mat-form-field class="form-control">
+                <mat-label>Въведи опция</mat-label>
+                <mat-checkbox class="checkboxPosition" [(ngModel)]="question.answers[2].rightAnswer"></mat-checkbox>
+                <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" [(ngModel)]="question.answers[2].answer"></textarea>
+                <!-- <mat-error *ngIf="optionThree?.errors?.['required']">Въведи име на теста!</mat-error> -->
+            </mat-form-field>
+
+            <mat-form-field class="form-control">
+                <mat-label>Въведи опция</mat-label>
+                <mat-checkbox [disabled]="isDisabled" class="checkboxPosition" [(ngModel)]="question.answers[3].rightAnswer"></mat-checkbox>
+                <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" [(ngModel)]="question.answers[3].answer"></textarea>
+                <!-- <mat-error *ngIf="optionFour?.errors?.['required']">Въведи име на теста!</mat-error> -->
+            </mat-form-field>
+        </div>
+
+
+        <button class="button-positionRemove" mat-raised-button color="primary" (click)="deleteQuestion(index)">
+                  <mat-icon>delete</mat-icon></button>
+
     </div>
-    <div class="flex">
-        <div class="options center">
-            <form [formGroup]="createQuizForm">
-                <mat-form-field class="form-control">
-                    <mat-chip-list #chipList aria-label="Language selection">
-                        <mat-chip *ngFor="let language of languages" (removed)="remove(language)">
-                            {{language}}
-                            <button matChipRemove> <mat-icon>cancel</mat-icon> </button>
-                        </mat-chip>
-                        <input placeholder="Избери език или въведи твой (задължително):" #languageInput [formControl]="languageCtrl" [matAutocomplete]="auto" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add($event)">
-                    </mat-chip-list>
-                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-                        <mat-option *ngFor="let language of filteredLanguages | async" [value]="language">
-                            {{language}}
-                        </mat-option>
-                    </mat-autocomplete>
-                </mat-form-field>
-
-                <mat-form-field class="form-control">
-                    <mat-label>Въведи име на теста (задължително):</mat-label>
-                    <input matInput type="text" placeholder="Title of quiz" formControlName="titleOfQuiz">
-                    <mat-error *ngIf="titleOfQuiz?.errors?.['required']">Въведи име на теста!</mat-error>
-                </mat-form-field>
-
-                <mat-form-field class="form-control">
-                    <mat-label>Въведи описание на теста:</mat-label>
-                    <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" placeholder="Description of quiz"></textarea>
-                </mat-form-field>
-            </form>
-        </div>
-
-        <div class="spaceBetween"></div>
+</div>
 
 
-        <div class="questions" *ngFor="let question of questions; let index = index">
-            <div class="center">
-                <div class="form-questionTitle">
-                    <mat-form-field class="form-control">
-                        <mat-label class="text-center">Въведи въпрос</mat-label>
-                        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" [(ngModel)]="question.title"></textarea>
-                    </mat-form-field>
-                </div>
-            </div>
 
-            <div class="center">
-                <div class="formContainer">
-                    <mat-form-field class="form-control">
-                        <mat-label>Въведи опция</mat-label>
-                        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" [(ngModel)]="question.possibleAnswer[0]"></textarea>
-                    </mat-form-field>
+<div class="spaceBetween"></div>
 
-                    <mat-form-field class="form-control">
-                        <mat-label>Въведи опция</mat-label>
-                        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" [(ngModel)]="question.possibleAnswer[1]"></textarea>
-                    </mat-form-field>
-                </div>
-
-                <div class="formContainer">
-                    <mat-form-field class="form-control">
-                        <mat-label>Въведи опция</mat-label>
-                        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" [(ngModel)]="question.possibleAnswer[2]"></textarea>
-                    </mat-form-field>
-
-                    <mat-form-field class="form-control">
-                        <mat-label>Въведи опция</mat-label>
-                        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" [(ngModel)]="question.possibleAnswer[3]"></textarea>
-                    </mat-form-field>
-                </div>
-                <button class="button-position" mat-raised-button color="primary" (click)="deleteQuestion(index)">Премахни въпроса</button>
-            </div>
-        </div>
-
-
-        <div class="spaceBetween"></div>
-
-        <div class="center">
-            <button mat-raised-button color="primary" (click)="saveQuiz()">Запази теста</button>
-        </div>
+<div class="center">
+    <button mat-raised-button color="primary" (click)="saveQuiz()"><mat-icon>save</mat-icon></button>
+</div>

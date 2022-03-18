@@ -49,7 +49,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatSelectModule} from '@angular/material/select';
-import { QuizSolveComponent } from './components/quiz-solve/quiz-solve.component';
+import { QuizSolveComponent } from './components/quiz-solve-welcome/quiz-solve.component';
 import { ModalComponent } from './components/modal/modal.component';
 import {MatTreeModule} from '@angular/material/tree';
 import { JavaDataVariablesComponent } from './components/programmingInformation/Java/java-data-variables/java-data-variables.component';
@@ -61,6 +61,20 @@ import { EasyCalculationsComponent } from './components/programmingInformation/J
 import { ComplicatedConditionsComponent } from './components/programmingInformation/JavaScript/complicated-conditions/complicated-conditions.component';
 import { JavaScriptCyclesComponent } from './components/programmingInformation/JavaScript/java-script-cycles/java-script-cycles.component';
 import { JavascriptFunctionsComponent } from './components/programmingInformation/JavaScript/javascript-functions/javascript-functions.component';
+import { QuizSolveQuestionsComponent } from './components/quiz-solve-questions/quiz-solve-questions.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ChangeBgDirective } from './change-bg.directive';
+import { FooterComponent } from './components/footer/footer.component';
+import { EmailVerifyComponent } from './components/email-verify/email-verify.component';
+import { PasswordConfirmComponent } from './components/password-confirm/password-confirm.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { EmailConfirmationComponent } from './components/email-confirmation/email-confirmation.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { ScrollToTopComponent } from './components/scroll-to-top/scroll-to-top.component';
+import {MatTableModule} from '@angular/material/table';
+
+
 
 
 
@@ -94,6 +108,16 @@ import { JavascriptFunctionsComponent } from './components/programmingInformatio
     ComplicatedConditionsComponent,
     JavaScriptCyclesComponent,
     JavascriptFunctionsComponent,
+    QuizSolveQuestionsComponent,
+    ChangeBgDirective,
+    FooterComponent,
+    EmailVerifyComponent,
+    PasswordConfirmComponent,
+    ResetPasswordComponent,
+    EmailConfirmationComponent,
+    ScrollToTopComponent,
+
+
 
 
 
@@ -117,6 +141,7 @@ import { JavascriptFunctionsComponent } from './components/programmingInformatio
     MatToolbarModule,
     RouterModule,
     NgbModule,
+    HttpClientModule,
     FontAwesomeModule,
     ReactiveFormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
@@ -133,6 +158,9 @@ import { JavascriptFunctionsComponent } from './components/programmingInformatio
     MatAutocompleteModule,
     MatSelectModule,
     MatTreeModule,
+    MatCheckboxModule,
+    MatExpansionModule,
+    MatTableModule,
     provideFunctions(() => getFunctions()),
     provideMessaging(() => getMessaging()),
     provideStorage(() => getStorage()),
