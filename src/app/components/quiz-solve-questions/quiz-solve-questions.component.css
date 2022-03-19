@@ -23,3 +23,10 @@ li .card:hover {
 ol {
     padding: 0;
 }
+
+.questionTextStyle {
+    font-weight: bolder;
+    font-style: italic;
+    font-size: 18px;
+    text-align: justify;
+}

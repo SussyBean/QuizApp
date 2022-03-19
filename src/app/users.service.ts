@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
-import { doc, docData, Firestore, setDoc, updateDoc } from '@angular/fire/firestore';
+import { collection, doc, docData, Firestore, getDocs, setDoc, updateDoc } from '@angular/fire/firestore';
 import { from, Observable, of, switchMap } from 'rxjs';
 import { ProfileUser } from './models/user-profile';
 import { AuthenticationService } from './services/authentication.service';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+
+  public usersInfo: any = [];
 
   get currentUserProfile$(): Observable<ProfileUser | null>{
     return this.authService.currentUser$.pipe(
@@ -22,6 +25,28 @@ export class UserService {
       })
     )
   }
+
+  async showAllUsers(){
+     const dbInstance = collection(this.firestore,'users');
+     await getDocs(dbInstance).then((response) => {
+      this.usersInfo = [...response.docs.map((item) => {
+        return {...item.data(),uid:item.id}
+      })]
+     })
+  }
+
+
+ async getUsersId(): Promise<ProfileUser[]>{
+   await this.showAllUsers();
+   let usersId: ProfileUser[]= [];
+   for(let i of this.usersInfo){
+     usersId.push({uid: i['uid']})
+   }
+   console.log(usersId);
+   return usersId;
+
+ }
+
 
   constructor(private firestore: Firestore,private authService: AuthenticationService) { }
 

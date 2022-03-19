@@ -27,6 +27,7 @@ import { EmailVerifyComponent } from './components/email-verify/email-verify.com
 import { EmailConfirmationComponent } from './components/email-confirmation/email-confirmation.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { LandingComponent } from './components/landing/landing.component';
+import { FormsTestComponent } from './components/forms-test/forms-test.component';
 
 
 const redirectToLogin = () => redirectUnauthorizedTo(['login']);
@@ -64,6 +65,7 @@ import('./features/auth/auth.module').then((m) => m.AuthModule)},
 {path:'quizes/:id',component:QuizSolveQuestionsComponent,...canActivate(redirectToLogin)},
 {path:'profile',component:ProfileComponent,...canActivate(redirectToLogin)},
 {path:'modal',component:ModalComponent},
+{path:'form-testing',component:FormsTestComponent},
 {path: '**',redirectTo: '/landing',pathMatch: 'full'}
 ];
 

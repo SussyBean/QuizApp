@@ -4,12 +4,11 @@
 
 .form-control {
     display: block;
-    margin: 10px;
-    width: 85%;
+    margin: 30px;
+    width: 90%;
 }
 
 .beginning-text {
-    padding: 40px;
     font-size: 20px;
     font-weight: bold;
 }
@@ -19,7 +18,7 @@
     border-radius: 16px;
     display: block;
     width: 37%;
-    margin-left: 50px;
+    margin-left: 470px;
 }
 
 .center-options {
@@ -69,9 +68,15 @@
 }
 
 .form-questionTitle {
+    display: block;
+    margin: 10px;
+    width: 90%;
+}
+
+.form-questionOption {
     min-width: 150px;
     max-width: 500px;
-    width: 70%;
+    width: 100%;
 }
 
 .form-Options_Control {

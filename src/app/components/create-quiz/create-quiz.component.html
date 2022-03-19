@@ -1,8 +1,7 @@
 <div class="spaceBetween"></div>
-<div class="beginning-text text-center">
-    Тук можеш да създадеш свой собствен тест
-</div>
+
 <div class="spaceBetween"></div>
+
 <ng-container class="center">
     <div class="button-position center">
         <button class="button-positionInfo" mat-raised-button color="primary" routerLink="/about">
@@ -14,14 +13,20 @@
 
 
 <div class="options center">
-    <form [formGroup]="createQuizForm">
+
+    <div class="beginning-text center">
+        Създай твой тест тук
+    </div>
+
+    <form [formGroup]="quizForm" (ngSubmit)="saveQuiz()">
         <mat-form-field class="form-control">
             <mat-chip-list #chipList aria-label="Language selection">
                 <mat-chip *ngFor="let language of languages" (removed)="remove(language)">
                     {{language}}
                     <button matChipRemove> <mat-icon>cancel</mat-icon> </button>
                 </mat-chip>
-                <input placeholder="Избери език или въведи твой (задължително):" #languageInput [formControl]="languageCtrl" [matAutocomplete]="auto" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add($event)">
+                <input placeholder="Избери език или въведи твой (задължително):" #languageInput [formControl]="languageCtrl" [matAutocomplete]="auto" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add($event)"
+                    required>
             </mat-chip-list>
             <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
                 <mat-option *ngFor="let language of filteredLanguages | async" [value]="language">
@@ -33,79 +38,136 @@
         <mat-form-field class="form-control">
             <mat-label>Въведи име на теста (задължително):</mat-label>
             <input matInput type="text" placeholder="Title of quiz" formControlName="titleOfQuiz">
-            <mat-error *ngIf="titleOfQuiz?.errors?.['required']">Въведи име на теста!</mat-error>
+            <mat-error *ngIf="titleOfQuiz?.errors?.['required']">Задължително поле!</mat-error>
         </mat-form-field>
 
         <mat-form-field class="form-control">
             <mat-label>Въведи описание на теста:</mat-label>
             <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" placeholder="Description of quiz" formControlName="description"></textarea>
-            <mat-error *ngIf="description?.errors?.['required']">Въведи име на теста!</mat-error>
+            <mat-error *ngIf="description?.errors?.['required']">Задължително поле!</mat-error>
         </mat-form-field>
 
+        <div class="spaceBetween"></div>
+        <div formArrayName="questions">
 
+            <ng-container *ngFor="let questionsFormGroup of questionControls().controls; let i = index" [formGroupName]="i">
+
+                <div class="center">
+                    <div class="form-questionTitle">
+                        <mat-form-field class="form-control">
+                            <mat-label>Въведи въпрос</mat-label>
+                            <input matInput type="text" formControlName="title" required>
+                            <mat-error *ngIf="questionsFormGroup.get('title')?.hasError('required')">Задължително поле!</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <button class="button-positionRemove" mat-raised-button color="primary" (click)="deleteQuestion(index)">
+                  <mat-icon>delete</mat-icon></button>
+
+                <div class="center">
+                    <div class="form-questionTitle">
+                        <mat-form-field class="form-control">
+                            <mat-label>Въведи опция</mat-label>
+                            <input type="radio" formControlName="rightAnswer" value="option1" class="checkboxPosition">
+                            <input matInput type="text" formControlName="option1" required>
+                            <mat-error *ngIf="questionsFormGroup.get('option1')?.hasError('required')">Задължително поле!</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="form-control">
+                            <mat-label>Въведи опция</mat-label>
+                            <input type="radio" formControlName="rightAnswer" value="option2" class="checkboxPosition">
+                            <input matInput type="text" formControlName="option2" required>
+                            <mat-error *ngIf="questionsFormGroup.get('option2')?.hasError('required')">Задължително поле!</mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-questionTitle">
+                        <mat-form-field class="form-control">
+                            <mat-label>Въведи опция</mat-label>
+                            <input type="radio" formControlName="rightAnswer" value="option3" class="checkboxPosition">
+                            <input matInput type="text" formControlName="option3" required>
+                            <mat-error *ngIf="questionsFormGroup.get('option3')?.hasError('required')">Задължително поле!</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="form-control">
+                            <mat-label>Въведи опция</mat-label>
+                            <input type="radio" formControlName="rightAnswer" value="option4" class="checkboxPosition">
+                            <input matInput type="text" formControlName="option4" required>
+                            <mat-error *ngIf="questionsFormGroup.get('option4')?.hasError('required')">Задължително поле!</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+        <div class="spaceBetween"></div>
+        <div class="center">
+            <button mat-raised-button color="primary" type="submit"><mat-icon>save</mat-icon></button>
+        </div>
     </form>
 </div>
 
 
-<div class="spaceBetween"></div>
 
 
-<div class="questions" *ngFor="let question of questions; let index = index">
-    <div class="center">
+<!--
+<form [formGroup]="quizForm">
+    <div formGroupName="questionArray">
+        <div class="questions" *ngFor="let question of questions; let index = index">
 
-        <div class="form-questionTitle">
-            <mat-form-field class="form-control">
-                <mat-label class="text-center">Въведи въпрос</mat-label>
-                <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" [(ngModel)]="question.title"></textarea>
-                <!-- <mat-error *ngIf="titleOfQuestion?.errors?.['required']">Въведи име на теста!</mat-error> -->
-            </mat-form-field>
-        </div>
-    </div>
+            <div class="center">
+                <div class="form-questionTitle">
+                    <mat-form-field class="form-control">
+                        <mat-label class="text-center">Въведи въпрос</mat-label>
+                        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" [(ngModel)]="question.title" formControlName="titleOfQuestion"></textarea>
+                        <mat-error>*ngIf="titleOfQuestion?.errors?.['required']">Задължително поле!</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
 
-    <div class="center">
-        <div class="formContainer">
-            <mat-form-field class="form-control">
-                <mat-label>Въведи опция</mat-label>
-                <mat-checkbox [disabled]="isDisabled" class="checkboxPosition" [(ngModel)]="question.answers[0].rightAnswer"></mat-checkbox>
-                <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" [(ngModel)]="question.answers[0].answer"></textarea>
-                <!-- <mat-error *ngIf="optionOne?.errors?.['required']">Въведи име на теста!</mat-error> -->
-            </mat-form-field>
+            <div class="center">
+                <div class="formContainer">
+                    <mat-form-field class="form-control">
+                        <mat-label>Въведи опция</mat-label>
+                        <mat-checkbox [disabled]="isDisabled" class="checkboxPosition" [(ngModel)]="question.answers[0].rightAnswer"></mat-checkbox>
+                        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" [(ngModel)]="question.answers[0].answer" formControlName="optionOne"></textarea>
+                        <mat-error>*ngIf="optionOne?.errors?.['required']">Задължително поле!</mat-error>
+                    </mat-form-field>
 
-            <mat-form-field class="form-control">
-                <mat-label>Въведи опция</mat-label>
-                <mat-checkbox [disabled]="isDisabled" class="checkboxPosition" [(ngModel)]="question.answers[1].rightAnswer"></mat-checkbox>
-                <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" [(ngModel)]="question.answers[1].answer"></textarea>
-                <!-- <mat-error *ngIf="optionTwo?.errors?.['required']">Въведи име на теста!</mat-error> -->
-            </mat-form-field>
-        </div>
+                    <mat-form-field class="form-control">
+                        <mat-label>Въведи опция</mat-label>
+                        <mat-checkbox [disabled]="isDisabled" class="checkboxPosition" [(ngModel)]="question.answers[1].rightAnswer"></mat-checkbox>
+                        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" [(ngModel)]="question.answers[1].answer" formControlName="optionTwo"></textarea>
+                        <mat-error>*ngIf="optionTwo?.errors?.['required']">Задължително поле!</mat-error>
+                    </mat-form-field>
+                </div>
 
-        <div class="formContainer">
-            <mat-form-field class="form-control">
-                <mat-label>Въведи опция</mat-label>
-                <mat-checkbox class="checkboxPosition" [(ngModel)]="question.answers[2].rightAnswer"></mat-checkbox>
-                <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" [(ngModel)]="question.answers[2].answer"></textarea>
-                <!-- <mat-error *ngIf="optionThree?.errors?.['required']">Въведи име на теста!</mat-error> -->
-            </mat-form-field>
+                <div class="formContainer">
+                    <mat-form-field class="form-control">
+                        <mat-label>Въведи опция</mat-label>
+                        <mat-checkbox class="checkboxPosition" [(ngModel)]="question.answers[2].rightAnswer"></mat-checkbox>
+                        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" [(ngModel)]="question.answers[2].answer" formControlName="optionThree"></textarea>
+                        <mat-error>*ngIf="optionThree?.errors?.['required']">Задължително поле!</mat-error>
+                    </mat-form-field>
 
-            <mat-form-field class="form-control">
-                <mat-label>Въведи опция</mat-label>
-                <mat-checkbox [disabled]="isDisabled" class="checkboxPosition" [(ngModel)]="question.answers[3].rightAnswer"></mat-checkbox>
-                <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" [(ngModel)]="question.answers[3].answer"></textarea>
-                <!-- <mat-error *ngIf="optionFour?.errors?.['required']">Въведи име на теста!</mat-error> -->
-            </mat-form-field>
-        </div>
+                    <mat-form-field class="form-control">
+                        <mat-label>Въведи опция</mat-label>
+                        <mat-checkbox [disabled]="isDisabled" class="checkboxPosition" [(ngModel)]="question.answers[3].rightAnswer"></mat-checkbox>
+                        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" [(ngModel)]="question.answers[3].answer" formControlName="optionFour"></textarea>
+                        <mat-error>*ngIf="optionFour?.errors?.['required']">Задължително поле!</mat-error>
+                    </mat-form-field>
+                </div>
 
-
-        <button class="button-positionRemove" mat-raised-button color="primary" (click)="deleteQuestion(index)">
+                <button class="button-positionRemove" mat-raised-button color="primary" (click)="deleteQuestion(index)">
                   <mat-icon>delete</mat-icon></button>
-
+            </div>
+        </div>
     </div>
-</div>
+
+
+</form> -->
+
 
 
 
 <div class="spaceBetween"></div>
-
-<div class="center">
-    <button mat-raised-button color="primary" (click)="saveQuiz()"><mat-icon>save</mat-icon></button>
-</div>

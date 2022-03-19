@@ -73,6 +73,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { ScrollToTopComponent } from './components/scroll-to-top/scroll-to-top.component';
 import {MatTableModule} from '@angular/material/table';
+import { FormsTestComponent } from './components/forms-test/forms-test.component';
+import { FormsContactComponent } from './components/forms-test/forms-contact/forms-contact.component';
 
 
 
@@ -116,6 +118,8 @@ import {MatTableModule} from '@angular/material/table';
     ResetPasswordComponent,
     EmailConfirmationComponent,
     ScrollToTopComponent,
+    FormsTestComponent,
+    FormsContactComponent,
 
 
 

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { collection, getDocs } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { interval } from 'rxjs';
 import { iQuiz, QuizService } from 'src/app/services/quiz.service';
@@ -19,6 +18,7 @@ export class QuizSolveQuestionsComponent implements OnInit {
 
 
   public currentQuestion:number=0;
+  public getTitleOfQuiz!:string;
   public points:number=0;
   counter=60;
   correctAnswer: number = 0;
@@ -32,7 +32,6 @@ export class QuizSolveQuestionsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.getAllQuestions();
     this.startCounter();
   }
@@ -40,6 +39,7 @@ export class QuizSolveQuestionsComponent implements OnInit {
   getAllQuestions(){
     this.route.paramMap.subscribe(async (params) => {
       this.quiz = await this.quizService.getQuize(params.get('id') + "");
+      this.getTitleOfQuiz = await this.quizService.titleOfQuiz;
     });
   }
 
@@ -60,11 +60,16 @@ export class QuizSolveQuestionsComponent implements OnInit {
   answer(currentQno:number,option:any){
     console.log(this.isQuizCompleted);
     console.log(this.currentQuestion);
-    if(this.quiz && currentQno === this.quiz.questions.length-1){
-      this.isQuizCompleted=true;
-      this.stopCounter();
-    }
 
+
+
+    if(this.quiz && currentQno === this.quiz.questions.length-1){
+      setTimeout(() => {
+        this.isQuizCompleted=true;
+        this.stopCounter();
+      },300)
+
+    }
      if(option.correct){
       this.points+=10;
       this.correctAnswer++;
@@ -83,6 +88,7 @@ export class QuizSolveQuestionsComponent implements OnInit {
       }, 200);
        this.points-=10;
      }
+
   }
 
 
@@ -125,12 +131,14 @@ export class QuizSolveQuestionsComponent implements OnInit {
   }
 
   getProgressPercent(){
-    this.progress = ((this.currentQuestion/this.questionList.length)*100).toString();
+    if(this.quiz)
+    this.progress = ((this.currentQuestion/this.quiz.questions.length)*100).toString();
     return this.progress;
   }
 
   getProgressPercentBackwards(){
-    this.progress=((this.currentQuestion/this.questionList.length)*100).toString();
+    if(this.quiz)
+    this.progress=((this.currentQuestion/this.quiz.questions.length)*100).toString();
   }
 
 

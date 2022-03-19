@@ -26,6 +26,7 @@ export interface iQuiz {
 })
 export class QuizService {
   public data: any = [];
+  public titleOfQuiz!: string;
 
   constructor(private http: HttpClient, private firestore: Firestore) {}
 
@@ -45,47 +46,62 @@ export class QuizService {
   }
 
   async getQuizes(): Promise<iQuiz[]> {
-
     await this.showAllQuizes();
 
     let quizes: iQuiz[] = [];
+
     for (let row of this.data) {
       let parsedQuiz;
 
       try {
-        parsedQuiz = JSON.parse(row['quiz'][0]);
-      }
-
-      catch(ex) {
-        console.error("Can't parse the JSON", ex, row['quiz']);
+        parsedQuiz = JSON.parse(row['quiz']);
+      } catch (ex) {
+        console.error("Caan't parse the JSON", ex, row['quiz']);
         return [];
       }
+      console.log(parsedQuiz);
 
       let questions: iQuizQestion[] = [];
 
-      for (let i in parsedQuiz[0]) {
+      for (let i in parsedQuiz['questions']) {
         let options: iQuizQestionOption[] = [];
 
-        for (let j in parsedQuiz[0][i]['answers']) {
-          options.push({
-            text: parsedQuiz[0][i]['answers'][j]['answer'],
-            correct: parsedQuiz[0][i]['answers'][j]['rightAnswer'],
-          });
-        }
+        options.push(
+          {
+            text: parsedQuiz['questions'][i]['option1'],
+            correct: parsedQuiz['questions'][i]['rightAnswer'] == 'option1',
+          },
+          {
+            text: parsedQuiz['questions'][i]['option2'],
+            correct: parsedQuiz['questions'][i]['rightAnswer'] == 'option2',
+          },
+          {
+            text: parsedQuiz['questions'][i]['option3'],
+            correct: parsedQuiz['questions'][i]['rightAnswer'] == 'option3',
+          },
+          {
+            text: parsedQuiz['questions'][i]['option4'],
+            correct: parsedQuiz['questions'][i]['rightAnswer'] == 'option4',
+          }
+        );
+
+
         questions.push({
-          questionText: parsedQuiz[0][i]['title'],
+          questionText: parsedQuiz['questions'][i]['title'],
           options: options,
         });
       }
 
       quizes.push({
         id: row['id'],
-        name: parsedQuiz[1]['titleOfQuiz'],
-        description: parsedQuiz[1]['description'],
-        languages: parsedQuiz[2],
+        name: parsedQuiz['titleOfQuiz'],
+        description: parsedQuiz['description'],
+        languages: parsedQuiz['languages'],
         questions: questions,
       });
     }
+
+    console.log(quizes);
     return quizes;
   }
 
@@ -94,7 +110,7 @@ export class QuizService {
 
     for (let i = 0; i < quizes.length; i++) {
       const quize = quizes[i];
-
+      this.titleOfQuiz = quizes[i].name;
       if (quize.id == id) {
         return quize;
       }
@@ -107,5 +123,4 @@ export class QuizService {
     const ref = doc(this.firestore, 'quizes', docRef.id);
     return from(setDoc(ref, quiz, { merge: true }));
   }
-
 }

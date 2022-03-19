@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {
   AbstractControl,
+  FormArray,
   FormBuilder,
   FormControl,
   FormGroup,
@@ -32,9 +33,6 @@ export function numberOfQuestionsValidator(): ValidatorFn {
   };
 }
 
-
-
-
 interface Question {
   title: string;
   answers: Answer[];
@@ -42,21 +40,19 @@ interface Question {
 
 interface Answer {
   answer: string;
- rightAnswer:boolean;
+  rightAnswer: boolean;
 }
 
- export function initAnswer(answers?: Partial<Answer>): Answer {
+export function initAnswer(answers?: Partial<Answer>): Answer {
   const defaults = {
     answer: '',
-    rightAnswer:false
+    rightAnswer: false,
   };
   return {
     ...defaults,
     ...answers,
   };
 }
-
-
 
 @Component({
   selector: 'app-create-quiz',
@@ -67,7 +63,7 @@ export class CreateQuizComponent implements OnInit {
   // title = 'json-file-read-angular';
   // public countryList:{name:string, code:string}[] = countries;
 
-  user$=this.usersService.currentUserProfile$;
+  user$ = this.usersService.currentUserProfile$;
 
   separatorKeysCodes: number[] = [ENTER, COMMA];
   languageCtrl = new FormControl();
@@ -76,56 +72,81 @@ export class CreateQuizComponent implements OnInit {
   filteredLanguages!: Observable<string[]>;
   languages: string[] = [];
   containsInfo = false;
-  isDisabled=false;
-  allProgrammingLanguages: string[] = [
-    'Java',
-    'C#',
-    'C++',
-    'JavaScript'
-  ];
+  isDisabled = false;
+  allProgrammingLanguages: string[] = ['Java', 'C#', 'C++', 'JavaScript'];
   autoCompleteCtrl = new FormControl('', [Validators.required]);
   row = document.createElement('div');
-  index=-1;
+  index = -1;
 
   questions: Question[] = [];
 
   @ViewChild('languageInput') languageInput!: ElementRef<HTMLInputElement>;
   @ViewChild('autosize') autosize!: CdkTextareaAutosize;
 
-  createQuizForm!: FormGroup;
   createQuestionTitle!: FormGroup;
   createQuestionDetails!: FormGroup;
-
+  public quizForm!: FormGroup;
+  public questionArrayDelete!: FormArray;
 
   ngOnInit(): void {
-    this.createQuizForm = this.fb.group(
+    this.quizForm = this.fb.group(
       {
-        autoComplete: new FormControl('', [Validators.required]),
-        titleOfQuiz: new FormControl('', [Validators.required]),
-        description: new FormControl('',[Validators.required])
+        autoComplete: ['', Validators.required],
+        titleOfQuiz: ['', Validators.required],
+        description: ['', Validators.required],
+
+        questions: this.fb.array([]),
       },
       { validators: numberOfQuestionsValidator() }
     );
 
+    //this.createQuizForm.addControl
 
-
-    this.createQuestionDetails = this.fb.group({
-      titleOfQuestion: new FormControl('',[Validators.required]),
-      optionOne: new FormControl('',[Validators.required]),
-      optionTwo: new FormControl('',[Validators.required]),
-      optionThree: new FormControl('',[Validators.required]),
-      optionFour: new FormControl('',[Validators.required])
-    });
-
+    // this.quizForm= this.fb.group({
+    //   questionArray: this.fb.array([
+    //     this.fb.group({
+    //       titleOfQuestion: new FormControl('',[Validators.required]),
+    //       optionOne: new FormControl('',[Validators.required]),
+    //       optionTwo: new FormControl('',[Validators.required]),
+    //       optionThree: new FormControl('',[Validators.required]),
+    //       optionFour: new FormControl('',[Validators.required])
+    //     })
+    //   ])
+    // })
   }
 
-  constructor(private fb: FormBuilder, private router: Router, private el: ElementRef,private quizService: QuizService,private usersService:UserService) {
+  // addFormControl() {
+  //   let usersArray = this.quizForm.controls.questions as FormArray;
+  //   let arraylen = usersArray.length;
+
+  //   let newUsergroup: FormGroup = this.fb.group({
+  //     titleOfQuestion: new FormControl('',[Validators.required]),
+  //     optionOne: new FormControl('',[Validators.required]),
+  //     optionTwo: new FormControl('',[Validators.required]),
+  //     optionThree: new FormControl('',[Validators.required]),
+  //     optionFour: new FormControl('',[Validators.required])
+  //   })
+
+  //   usersArray.insert(arraylen, newUsergroup);
+  // }
+
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private el: ElementRef,
+    private quizService: QuizService,
+    private usersService: UserService
+  ) {
     this.filteredLanguages = this.languageCtrl.valueChanges.pipe(
       startWith(null),
       map((language: string | null) =>
         language ? this._filter(language) : this.allProgrammingLanguages.slice()
       )
     );
+  }
+
+  questionControls() : FormArray {
+    return this.quizForm.get("questions") as FormArray
   }
 
   remove(language: string): void {
@@ -173,39 +194,38 @@ export class CreateQuizComponent implements OnInit {
   }
 
   get numberOfQuestions() {
-    return this.createQuizForm.get('numberOfQuestions');
+    return this.quizForm.get('numberOfQuestions');
   }
 
   get autoComplete() {
-    return this.createQuizForm.get('autoComplete');
+    return this.quizForm.get('autoComplete');
   }
 
   get titleOfQuiz() {
-    return this.createQuizForm.get('titleOfQuiz');
+    return this.quizForm.get('titleOfQuiz');
   }
 
-  get optionOne(){
+  get optionOne() {
     return this.createQuestionDetails.get('optionOne');
   }
 
-  get optionTwo(){
+  get optionTwo() {
     return this.createQuestionDetails.get('optionTwo');
   }
-  get optionThree(){
+  get optionThree() {
     return this.createQuestionDetails.get('optionThree');
   }
-  get optionFour(){
+  get optionFour() {
     return this.createQuestionDetails.get('optionFour');
   }
 
-  get titleOfQuestion(){
+  get titleOfQuestion() {
     return this.createQuestionDetails.get('titleOfQuestion');
   }
 
-  get description(){
-    return this.createQuizForm.get('description');
+  get description() {
+    return this.quizForm.get('description');
   }
-
 
   getErrorMessage() {
     return this.autoComplete?.hasError('required')
@@ -213,60 +233,68 @@ export class CreateQuizComponent implements OnInit {
       : '';
   }
 
+  addNewQuestion() {
+    let questionsArray = this.quizForm.get("questions") as FormArray;
+    this.questionArrayDelete=questionsArray;
+    questionsArray.push(
+      this.fb.group({
+      title: ['', Validators.required],
+      option1: ['', Validators.required],
+      option2: ['', Validators.required],
+      option3: ['', Validators.required],
+      option4: ['', Validators.required],
+      rightAnswer:['',Validators.required]
+    })
+
+    )
 
 
-  addNewQuestion(){
-      this.questions.push({
-        title: '',
-        answers: [initAnswer(),initAnswer(),initAnswer(),initAnswer()],
-      });
-   console.log(this.questions.length);
+/*
+    this.questions.push({
+      title: '',
+      answers: [initAnswer(), initAnswer(), initAnswer(), initAnswer()],
+    });
+    console.log(this.questions.length);
+    */
   }
 
-
-
-  deleteQuestion(index: number) {
-    this.questions.splice(index, 1);
+  deleteQuestion(i: number) {
+    this.questionArrayDelete.removeAt(i);
   }
 
-  saveQuiz(){
-
-    for(let i=0; i<this.questions.length; i++){
+  saveQuiz() {
+    for (let i = 0; i < this.questions.length; i++) {
       console.log(this.questions[i].answers[i].rightAnswer);
-  }
-    if (!this.createQuizForm.valid) {
+    }
+    if (!this.quizForm.valid) {
       return;
     }
 
-    // var blobQuestions = new Blob([JSON.stringify(this.questions)],{type : 'application/json'});
-    // const blobQuizAdditionalInfo = new Blob([JSON.stringify(this.createQuizForm.value)],{type: 'application/json'})
-    // const blobLanguages = new Blob([JSON.stringify(this.languages)],{type : 'application/json'});
+    let data = this.quizForm.value;
+    data['languages'] = this.languages;
 
-    const quiz = [JSON.stringify([this.questions,this.createQuizForm.value,this.languages])];
-    const quizTest = new Blob([JSON.stringify([this.questions,this.createQuizForm.value,this.languages])]);
+    const quiz = [
+      JSON.stringify(data),
+    ];
 
     console.log(quiz);
     var fr = new FileReader();
 
-    fr.onload = function(evt) {
+    fr.onload = function (evt) {
       var res = evt.target?.result;
-  };
+    };
 
-  this.usersService.currentUserProfile$.subscribe(
-    (res) => {
-      var uid = res!.uid;
-      this.quizService.addQuiz({uid,quiz})
-    },
-    (err) => console.log(err),
-    () => console.log('done!')
+    this.usersService.currentUserProfile$.subscribe(
+      (res) => {
+        var uid = res!.uid;
+        this.quizService.addQuiz({ uid, quiz });
+      },
+      (err) => console.log(err),
+      () => console.log('done!')
+    );
 
-  );
-
-  window.location.href = "/createQuiz"
-
-
+    setTimeout(() => {
+      window.location.href = '/createQuiz';
+    }, 1_000);
   }
-
 }
-
-

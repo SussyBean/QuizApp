@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProfileUser } from 'src/app/models/user-profile';
 import { iQuiz, iQuizQestion, iQuizQestionOption, QuizService } from 'src/app/services/quiz.service';
 import { UserService } from 'src/app/users.service';
 
@@ -13,6 +14,7 @@ export class QuizSolveComponent implements OnInit {
   user$ = this.usersService.currentUserProfile$;
 
   public quizes: iQuiz[] = [];
+  public usersId!: ProfileUser | false;
   public isLoading: boolean = true;
   public displayedColumns = ["name","description","languages", "button"];
 
@@ -31,7 +33,13 @@ export class QuizSolveComponent implements OnInit {
     console.log(msg)
   }
 
-  ngOnInit(): void {}
+  getNameOfQuizCreators(){
+
+  }
+
+  ngOnInit(): void {
+
+  }
 
   showQuizes() {}
 }
