@@ -22,3 +22,7 @@
     display: flex;
     gap: 16px;
 }
+
+.backGround {
+    background-color: rgb(115, 251, 211);
+}

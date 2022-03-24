@@ -27,6 +27,7 @@ export interface iQuiz {
 export class QuizService {
   public data: any = [];
   public titleOfQuiz!: string;
+  public quizesId: any = [];
 
   constructor(private http: HttpClient, private firestore: Firestore) {}
 
@@ -118,9 +119,19 @@ export class QuizService {
     return false;
   }
 
+  async getQuizesInfo(){
+    let quizes: iQuiz[] = await this.getQuizes();
+    for(let j=0;j<quizes.length;j++){
+      this.quizesId[j]=quizes[j].name;
+    }
+    return this.quizesId;
+  }
+
+
   async addQuiz(quiz: QuizModel): Promise<Observable<any>> {
     const docRef = await addDoc(collection(this.firestore, 'quizes'), { quiz });
     const ref = doc(this.firestore, 'quizes', docRef.id);
     return from(setDoc(ref, quiz, { merge: true }));
   }
+
 }

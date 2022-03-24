@@ -37,8 +37,11 @@ export class QuizSolveComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {
+  getQuizesId(){
 
+  }
+
+  ngOnInit(): void {
   }
 
   showQuizes() {}

@@ -75,6 +75,11 @@ import { ScrollToTopComponent } from './components/scroll-to-top/scroll-to-top.c
 import {MatTableModule} from '@angular/material/table';
 import { FormsTestComponent } from './components/forms-test/forms-test.component';
 import { FormsContactComponent } from './components/forms-test/forms-contact/forms-contact.component';
+import { MainNavComponent } from './main-nav/main-nav.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import {MatDialogModule} from '@angular/material/dialog';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { PopUpDialogComponent } from './components/pop-up-dialog/pop-up-dialog.component';
 
 
 
@@ -120,6 +125,9 @@ import { FormsContactComponent } from './components/forms-test/forms-contact/for
     ScrollToTopComponent,
     FormsTestComponent,
     FormsContactComponent,
+    MainNavComponent,
+    ConfirmDialogComponent,
+    PopUpDialogComponent
 
 
 
@@ -168,6 +176,8 @@ import { FormsContactComponent } from './components/forms-test/forms-contact/for
     provideFunctions(() => getFunctions()),
     provideMessaging(() => getMessaging()),
     provideStorage(() => getStorage()),
+    LayoutModule,
+    MatDialogModule
 
 
 

@@ -1,4 +1,4 @@
-import { Component, HostListener, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, Renderer2, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { AuthenticationService } from './services/authentication.service';
@@ -17,8 +17,12 @@ export class AppComponent {
   @ViewChild(MatSidenav)
   sidenav!:MatSidenav
 
-  constructor(public authService: AuthenticationService,private router: Router,private toast:HotToastService){
+  constructor(public authService: AuthenticationService,private router: Router,private toast:HotToastService,private el: ElementRef, private renderer:Renderer2){
+  }
 
+
+  ngAfterViewInit(){
+    this.renderer.setStyle(this.el.nativeElement.ownerDocument.body,'red', 'red');
   }
 
   sideBarToggler(){

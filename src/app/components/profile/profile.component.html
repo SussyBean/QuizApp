@@ -1,40 +1,47 @@
-<div class="spaceBetween"></div>
-<div class="content">
-    <div class="mat-elevation-z5 text-center form-containerProfile" *ngIf="user$ | async as user">
-        <h1>Профил</h1>
-        <div class="profile-image">
-            <img width="120" height="120" [src]="user.photoURL ?? 'assets/img/UserLogo.png'" />
-            <button mat-mini-fab (click)="inputfield.click()"><mat-icon>edit</mat-icon></button>
+<div class="backGround">
+    <div class="spaceBetween"></div>
+    <div class="content">
+        <div class="mat-elevation-z5 text-center form-containerProfile" *ngIf="user$ | async as user">
+            <h1>Профил</h1>
+            <div class="profile-image">
+                <img width="120" height="120" [src]="user.photoURL ?? 'assets/img/UserLogo.png'" />
+                <button mat-mini-fab (click)="inputfield.click()"><mat-icon>edit</mat-icon></button>
+            </div>
+            <input #inputfield type="file" hidden (change)="uploadImage($event,user)">
+
+            <form class="margin-top" [formGroup]="profileForm" (ngSubmit)="saveProfile()">
+
+                <div class="rowProfile">
+                    <mat-form-field>
+                        <input type="text" matInput formControlName="firstName" placeholder="Име" />
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input type="text" matInput formControlName="lastName" placeholder="Фамилия" />
+                    </mat-form-field>
+                </div>
+
+                <div class="rowProfile">
+                    <mat-form-field>
+                        <input type="text" matInput formControlName="displayName" placeholder="Потребителско име" />
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input type="number" matInput formControlName="phone" placeholder="Телефон" />
+                    </mat-form-field>
+                </div>
+
+                <mat-form-field>
+                    <input type="text" matInput formControlName="hobbies" placeholder="Хобита и интереси" />
+                </mat-form-field>
+
+                <button type="submit" class="margin-top" mat-raised-button color="primary">
+          Запази
+        </button>
+            </form>
+
+            <!--<button class="margin-top" mat-raised-button color="primary" (click)="deleteUser(user)">
+              Изтрии профил
+            </button> -->
         </div>
-        <input #inputfield type="file" hidden (change)="uploadImage($event,user)">
-
-        <form class="margin-top" [formGroup]="profileForm" (ngSubmit)="saveProfile()">
-
-            <div class="rowProfile">
-                <mat-form-field>
-                    <input type="text" matInput formControlName="firstName" placeholder="Име" />
-                </mat-form-field>
-                <mat-form-field>
-                    <input type="text" matInput formControlName="lastName" placeholder="Фамилия" />
-                </mat-form-field>
-            </div>
-
-            <div class="rowProfile">
-                <mat-form-field>
-                    <input type="text" matInput formControlName="displayName" placeholder="Потребителско име" />
-                </mat-form-field>
-                <mat-form-field>
-                    <input type="number" matInput formControlName="phone" placeholder="Телефон" />
-                </mat-form-field>
-            </div>
-
-            <mat-form-field>
-                <input type="text" matInput formControlName="hobbies" placeholder="Хобита и интереси" />
-            </mat-form-field>
-
-            <button type="submit" class="margin-top" mat-raised-button color="primary">
-        Запази
-      </button>
-        </form>
     </div>
+    <div class="spaceBetween"></div>
 </div>

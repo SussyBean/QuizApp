@@ -1,1 +1,250 @@
-<p class="titleMain center">Оператори и изрази в Java</p>
+<div class="backGround content">
+
+    <div class="text-center content">
+        <img src="assets/img/JavaLogo.jpg" class="img">
+
+
+        <div class="spaceBetween"></div>
+
+        <div class="title spaceBetween">Оператори и изрази</div>
+
+        <div class="center">
+            <mat-divider></mat-divider>
+        </div>
+        <div class="spaceBetween"></div>
+
+    </div>
+
+
+    <div class="list">
+        <br><br>
+        <div class="center">
+            <div class="text-styleTitle borderBox spaceBetween">
+                <h1 style="font-weight:bold">Какво представлява оператора?</h1>
+            </div>
+        </div>
+        <br> <br> <br> <br>
+        <div class="text-style spaceParagraphs center">
+            Операторите позволят манипулиране на примитивни типове данни. Те са символи, които извършат специфични операции над един, два или три операнда и връщат резултат от извършените операции. Пример за операторите са символите за събиране, изваждане, делене
+            и умножение в математиката (+, - , /, *) и операциите, които те извършват върху операндите, над които са приложени.
+        </div>
+        <div class="spaceBetween"></div>
+        <div class="content"></div>
+        <div class="content"></div>
+
+
+        <div class="center">
+
+            <h2>
+                <div class="center">
+                    <div class=" text-styleTitle borderBox bolder">
+                        Операторите в Java
+                    </div>
+                </div>
+
+
+                <div class="text-style">
+                    <div class="center">
+                        Те могат да бъдат разделени в няколко различни категории: <br> <br>
+                    </div>
+
+                    <div class="center">
+                        <ul>
+                            <br>
+                            <li>
+                                Аритметични – също както в математиката, служат за извършване на прости математически операции.
+                            </li>
+                            <br>
+                            <li>
+                                Оператори за присвояване – позволяват присвояването на стойност на променливите.
+                            </li>
+                            <br>
+                            <li>
+                                Оператори за сравнение – дават възможност за сравнение на два литерала и/или променливи.
+                            </li>
+                            <br>
+                            <li>
+                                Логически оператори – оператори за работа с логически типове данни.
+                            </li>
+                            <br>
+                            <li>
+                                Побитови оператори – използват се за извършване на операции върху двоичното представяне на числови данни.
+                            </li>
+                            <br>
+                            <li>
+                                Оператори за преобразуване на типовете – позволяват преобразуването на данни от един тип в друг.
+                            </li>
+                            <br>
+                        </ul>
+
+                    </div>
+                </div>
+
+                <div class="spaceBetween"></div>
+                <div class="content"></div>
+                <div class="content"></div>
+
+
+
+                <div class="center">
+                    <div class="text-styleTitle borderBox bolder">
+                        Оператори според броя аргументи
+                    </div>
+                </div>
+                <div class="content"></div>
+                <div class="center">
+                    Нека разгледаме списък на групите оператори, според броя аргументите, които приемат:
+                </div>
+
+                <div class="center">
+                    <ul>
+                        <br>
+                        <li>
+                            Едноаргументни(unary) - приема един аргумент
+                        </li>
+
+                        <br>
+                        <li>
+                            Двуаргументни(unary) - приема два аргумента
+                        </li>
+
+                        <br>
+                        <li>
+                            Триаргументни(unary) - приема три аргумента
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="center text-style">
+                    <br> Някой оператори в Java извършват различни операции, когато се приложат с различен тип данни. Пример за това е операторът +. Когато се използва с числени типове данни (int, long, float и др.), операторът извършва операцията математическо
+                    събиране. Когато обаче използваме оператора със символни низове, той слепва съдържанието на двете променливи / литерали и връща новополучения низ.
+                </div>
+                <div class="spaceBetween"></div>
+                <div class="content"></div>
+                <div class="content"></div>
+
+                <div class="center">
+                    <div class="text-styleTitle borderBox bolder">
+                        Приоритет на операторите в Java
+                    </div>
+                </div>
+                <div class="content"></div>
+                <div class="center">
+
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="smaller">
+                        <mat-expansion-panel-header>
+                            Натиснете стрелката за да {{panelOpenState ? 'затворите' : 'отворите'}} таблицата
+                        </mat-expansion-panel-header>
+
+                        <table mat-table [dataSource]="dataSource2" class="mat-elevation-z8">
+
+                            <ng-container matColumnDef="priority">
+                                <div class="textAlignJustify">
+                                    <th mat-header-cell *matHeaderCellDef class="bolder"> Категория </th>
+                                </div>
+                                <td mat-cell *matCellDef="let element"> {{element.priority}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="operator">
+                                <div class="textAlignJustify">
+                                    <th mat-header-cell *matHeaderCellDef class="bolder"> Оператор </th>
+                                </div>
+                                <td mat-cell *matCellDef="let element"> {{element.operator}} </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+                        </table>
+                    </mat-expansion-panel>
+
+                </div>
+
+                <br> <br>
+                <div class="center">
+                    <div class="text-style">
+                        Операторите, намиращи се по-нагоре в таблицата имат по-висок приоритет от тези, намиращи се след тях, съответно имат предимство при изчисляването на съответния израз. За да се предефинира приоритета може да се използват скоби.
+                    </div>
+                </div>
+                <div class="spaceBetween"></div>
+                <div class="content"></div>
+                <div class="content"></div>
+                <div class="content"></div>
+
+                <div class="center">
+                    <div class="text-styleTitle borderBox bolder">
+                        Категории оператори
+                    </div>
+                </div>
+
+                <div class="content"></div>
+                <div class="center">
+                    <div class="bolder">
+                        В по-долната таблица можем да разгледаме списък с операторите,разделени по категории
+                    </div>
+                </div>
+
+                <div class="content"></div>
+
+                <div class="center">
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="smaller">
+                        <mat-expansion-panel-header>
+                            Натиснете стрелката за да {{panelOpenState ? 'затворите' : 'отворите'}} таблицата
+                        </mat-expansion-panel-header>
+
+                        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                            <ng-container matColumnDef="category">
+                                <div class="textAlignJustify">
+                                    <th mat-header-cell *matHeaderCellDef class="bolder"> Категория </th>
+                                </div>
+                                <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="operator">
+                                <div class="textAlignJustify">
+                                    <th mat-header-cell *matHeaderCellDef class="bolder"> Оператор </th>
+                                </div>
+                                <td mat-cell *matCellDef="let element"> {{element.operator}} </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                    </mat-expansion-panel>
+                </div>
+
+                <div class="spaceBetween"></div>
+                <div class="content"></div>
+
+                <div class="center textTitle">Аритметични операции</div>
+                <div class="center">
+                    <mat-divider></mat-divider>
+                </div>
+                <br><br>
+                <div class="center">Аритметичните оператори +, -, * са същите като в математика. Те извършват събиране, изваждане и умножение върху числови стойности.</div>
+                <div class="content"></div>
+                <div class="content"></div>
+                <div class="center"> В по-долните примери можем да видим някои основни аритметични операции:</div>
+                <div class="content"></div>
+
+                <div class="center">
+                    <div class="borderBoxWhite center">
+                        int squarePerimeter = 17;
+                        <br> double squareSide = squarePerimeter / 4.0;
+                        <br> double squareArea = squareSide * squareSide;
+                        <br> System.out.println(squareSide); // 4.25
+                        <br> System.out.println(squareArea); // 18.0625
+                        <br> int a = 5;
+                        <br> int b = 4;
+                        <br> System.out.println(a + b); // 9
+                        <br> System.out.println(a + b++); // 9
+                        <br> System.out.println(a + (++b)); // 11
+                        <br> System.out.println(14 % a);
+                    </div>
+                </div>
+            </h2>
+
+        </div>
+    </div>
+
+</div>

@@ -2,7 +2,7 @@
 
     <mat-toolbar-row class="justify-content-between">
 
-        <button mat-icon-button (click)="toggleSidebar()"><mat-icon>menu</mat-icon></button>
+        <button mat-icon-button class="isOpen" (click)="toggleSidebar()"><mat-icon>menu</mat-icon></button>
         <ng-container *ngIf="user$ |async as user; else loginButton">
             <button style="position:fixed; right:0" mat-button [matMenuTriggerFor]="userMenu">
               <img

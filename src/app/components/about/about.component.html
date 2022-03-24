@@ -1,42 +1,91 @@
-<div class="center content">
-    <h1 class="title">Често задавани въпроси</h1>
-</div>
-<div class="text-center">
-    <h1 class="subTitle backGround">Ето и едни от най-задаваните въпроси, предоставени тук</h1>
-</div>
+<div class="backGround">
+    <div class="content"></div> <br><br><br>
+    <div class="text-center">
+        <h1 class="subTitle backGround">Най- често задавани въпроси</h1>
+    </div>
 
-<div class="center">
-    <mat-divider></mat-divider>
-</div>
+    <div class="center">
+        <mat-divider></mat-divider>
+    </div>
 
-<div class="spaceBetween"></div>
-<div class="center">
-    <mat-accordion>
-        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <div class="spaceBetween"></div>
+    <div class="center">
+        <mat-accordion>
 
-            <mat-expansion-panel-header>
-                <mat-panel-title> Как да създам нов тест?</mat-panel-title>
-            </mat-expansion-panel-header>
-            Отидете на <button mat-raised-button class="buttonDesign" routerLink="/createQuiz">Създай тест</button> за да може да създате ваш личен тест
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="bolder">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <div class="bolder larger">
+                            Защо не мога да създам или да реша тест?
+                        </div>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="text-center bolder ">
+                    За да може потребител да използва тези функционалности,той трябва да има създаден профил. <br> За тази цел влез в профила си или ако нямаш създай такъв.
+                </div>
+            </mat-expansion-panel>
+            <br><br><br>
 
-            <br> <br> <br> С бутона <button mat-raised-button color="primary"><mat-icon>add</mat-icon></button> потребител добавя нов въпрос
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="bolder">
 
-            <br> <br> <br> С бутона <button mat-raised-button color="primary"><mat-icon>delete</mat-icon></button> всеки въпрос може да бъде изтрит по всяко време
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <div class="bolder larger">
+                            Как да създам нов тест?
+                        </div>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
 
-            <br> <br> <br> С бутона <button mat-raised-button color="primary"><mat-icon>save</mat-icon></button> теста ви се запазва и можете да го решите в <button mat-raised-button class="buttonDesign" routerLink="/solveQuiz">Реши тест</button>
+                <div class="text-center bolder">
+                    Отидете на <button mat-raised-button class="buttonDesign" routerLink="/createQuiz">Създай тест</button> за да може да създате ваш личен тест
 
-        </mat-expansion-panel>
+                    <br> <br> <br> С бутона <button mat-raised-button color="primary"><mat-icon>add</mat-icon></button> потребител добавя нов въпрос
 
-        <br><br><br>
+                    <br> <br> <br> С бутона <button mat-raised-button color="primary"><mat-icon>delete</mat-icon></button> всеки въпрос може да бъде изтрит по всяко време
 
-        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-            <mat-expansion-panel-header>
-                <mat-panel-title>Как да решиш готов тест?</mat-panel-title>
-            </mat-expansion-panel-header>
+                    <br> <br> <br> С бутона <button mat-raised-button color="primary"><mat-icon>save</mat-icon></button> теста ви се запазва и можете да го решите в <button mat-raised-button class="buttonDesign" routerLink="/solveQuiz">Реши тест</button>
+                </div>
 
-            Отидете на <button mat-raised-button class="buttonDesign" routerLink="/solveQuiz">Реши тест</button> и изберете един от предоставените тестове
 
-        </mat-expansion-panel>
+            </mat-expansion-panel>
 
-    </mat-accordion>
+            <br><br><br>
+
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="bolder">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <div class="bolder larger">
+                            Как да решa тест?
+                        </div>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <div class="text-center bolder">
+                    Препоръчваме ви първо, да се запознаете с правилата за решаването на един тест,описани най-отгоре в раздела <button mat-raised-button class="buttonDesign" routerLink="/solveQuiz">Реши тест</button>
+                    <br> <br> <br> Можете да изберете,който тест желаете, като отидете на <button mat-raised-button class="buttonDesign" routerLink="/solveQuiz">Реши тест</button> и изберете един от предоставените тестове в таблицата
+                    <br> <br> <br> При натискане на бутона се генерира тест и след успешното му решаване, ще откриете и вашият резултат!
+                    <br> <br> <br> Успех!
+                </div>
+
+            </mat-expansion-panel>
+            <br><br><br>
+
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="bolder">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <div class="bolder larger">
+                            Как мога да използвам сайта най-ефективно?
+                        </div>
+                    </mat-panel-title>
+                </mat-expansion-panel-header><br>
+                <div class="text-center bolder">
+                    Това е информативен и образователен сайт. В зависимост от потребителя, той сам за себе си решава как да го използва.
+                    <br><br> Единственото, което бихме ви препоръчали е това след като сте приключили с четенето на даден раздел от сайта ни, след това да откриете подходящ за него тест.
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+
+    <div class="spaceBetween"></div>
+    <div class="spaceBetween"></div>
 </div>

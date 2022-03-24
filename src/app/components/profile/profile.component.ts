@@ -4,6 +4,7 @@ import { HotToastService } from '@ngneat/hot-toast';
 import { HotToastComponent } from '@ngneat/hot-toast/lib/components/hot-toast/hot-toast.component';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { User } from 'firebase/auth';
+import { user } from 'rxfire/auth';
 import { concatMap } from 'rxjs';
 import { ProfileUser } from 'src/app/models/user-profile';
 import { AuthenticationService } from 'src/app/services/authentication.service';
@@ -62,4 +63,13 @@ export class ProfileComponent implements OnInit {
     })
     ).subscribe()
   }
+
+  // deleteUser(user: ProfileUser){
+  //   this.usersService.deleteUser({uid:user.uid}).pipe(this.toast.observe({
+  //     loading:'We are deleteing your profile',
+  //     success:'Data deleted!',
+  //     error: 'There was an error in updating data'
+  //   }));
+  // }
+
 }

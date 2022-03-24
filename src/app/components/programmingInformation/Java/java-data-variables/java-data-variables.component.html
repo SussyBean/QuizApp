@@ -1,38 +1,247 @@
-<div class="spaceBetween"></div>
+<div class="backGround content">
+    <div class="text-center content">
+        <img src="assets/img/TypesOfVariables.jpg" class="img">
 
-<div class="text-center">
-    <img src="assets/img/JavaLogo.jpg" class="img">
 
+        <div class="spaceBetween"></div>
 
-    <div class="spaceBetween"></div>
+        <div class="title spaceBetween">Java променливи и тип-данни</div>
 
-    <div class="title">Java променливи и тип-данни</div>
-
-    <div class="center">
-        <mat-divider></mat-divider>
-    </div>
-
-    <div class="text-style">
-        <h1 style="font-weight:bold">Какво е променлива в Java?</h1>
-    </div>
-
-    <div class="spaceBetween"></div>
-    <div class="text-style">
-        <h2>
-            Променливата в Java е контейнер с данни, който съхранява стойностите на данните по време на изпълнение на Java програма. На всяка променлива се присвоява тип данни, който обозначава вида и количеството стойност, която може да съдържа. Променлива е име
-            на място в паметта на данните. Променливите на Java имат основно три типа: локални, инстанционни и статични.</h2>
+        <div class="center">
+            <mat-divider></mat-divider>
+        </div>
+        <div class="spaceBetween"></div>
 
     </div>
+    <br>
 
-</div>
+    <div class="list">
+        <br><br>
+        <div class="center">
+            <div class="text-styleTitle borderBox spaceBetween">
+                <h1 style="font-weight:bold">Типове данни</h1>
+            </div>
+        </div>
+        <br> <br> <br> <br>
+        <div class="text-style spaceParagraphs">
+            <h2>
+                Тип данни представлява съвкупност от стойности, които имат еднакви характеристики. Типовете данни са разделени на две групи: <br> <br>
+                <div class="center">
+                    <ul>
+                        <li>
+                            Примитивни типове данни - включва byte, short, int, long, floating, double, boolean и char.
+                        </li>
 
-<div class="list">
-    <h3 class="paragraph" style="font-weight:bold">Типовете данни се характеризират с: <br>
-        <ul>
-            <br>
-            <li> Име;</li> <br>
-            <li> Размер (колко памет заемат);</li> <br>
-            <li> Стойност по подразбиране (default value);</li>
-        </ul>
-    </h3>
+                        <li>
+                            Непримитивни типове данни - като String, Arrays и Classes
+                        </li>
+
+                    </ul>
+                </div>
+            </h2>
+        </div>
+
+
+        <div class="text-style spaceParagraphs">
+            <h2>
+                <div class="bolder">
+                    Типовете byte, short, int, long, float, double, boolean и char
+                </div> се наричат примитивни типове данни, тъй като са вградени в езика Java на най-ниско ниво. <br> <br>
+                <div class="bolder">
+                    Типовете Object и String
+                </div> са изписани с главна буква, тъй като са сложни типове (не са примитивни). Те представляват класове, които са дефинирани чрез средствата на езика Java, а не са част от него самия, а са част от стандартните библиотеки на Java.
+            </h2>
+        </div>
+
+
+
+        <div class="text-style spaceParagraphs">
+            <h2>Типовете данни се характеризират с: <br> <br>
+                <div class="center">
+                    <ul>
+                        <li>
+                            Име
+                        </li>
+
+                        <li>
+                            Размер (колко памет заемат)
+                        </li>
+
+                        <li>
+                            Стойност по подразбиране (default value)
+                        </li>
+                    </ul>
+                </div>
+
+            </h2>
+        </div>
+
+        <div class="textAlignJustify center">
+            <h2>
+                В следната таблица можем да видим изброените по-горе типове данни,включително стойностите им по подразбиране и техния обхват.
+            </h2>
+        </div>
+
+
+        <div class="center">
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
+                    Натиснете стрелката за да {{panelOpenState ? 'затворите' : 'отворите'}} таблицата
+                </mat-expansion-panel-header>
+
+                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                    <ng-container matColumnDef="typeData">
+                        <div class="textAlignJustify">
+                            <th mat-header-cell *matHeaderCellDef class="bolder"> Тип данни </th>
+                        </div>
+                        <td mat-cell *matCellDef="let element"> {{element.typeData}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="defaultValue">
+                        <div class="textAlignJustify">
+                            <th mat-header-cell *matHeaderCellDef class="bolder"> Стойност по подразбиране </th>
+                        </div>
+                        <td mat-cell *matCellDef="let element"> {{element.defaultValue}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="minValue">
+                        <div class="textAlignJustify">
+                            <th mat-header-cell *matHeaderCellDef class="bolder"> Минимална стойност </th>
+                        </div>
+                        <td mat-cell *matCellDef="let element"> {{element.minValue}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="maxValue">
+                        <div class="textAlignJustify">
+                            <th mat-header-cell *matHeaderCellDef class="bolder"> Максимална стойност </th>
+                        </div>
+                        <td mat-cell *matCellDef="let element"> {{element.maxValue}} </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </mat-expansion-panel>
+        </div>
+        <div class="content"></div>
+
+
+        <div class="center">
+            <div class="text-styleTitle borderBox">
+                <h1 style="font-weight:bold">Променлива в Java</h1>
+            </div>
+        </div>
+        <br> <br> <br> <br>
+        <div class="text-style">
+            <h2>
+                Променливата в Java е контейнер с данни, който съхранява стойностите на данните по време на изпълнение на Java програма. На всяка променлива се присвоява тип данни, който обозначава вида и количеството стойност, която може да съдържа. Променлива е име
+                на място в паметта на данните. Променливите на Java имат основно три типа: локални, инстанционни и статични.</h2>
+        </div>
+
+
+        <div class="center text-style">
+            <h2>
+                <br> <br> <br> Променливата е контейнер на информация, който може да променя стойността си. Тя осигурява възможност за: <br> <br>
+                <div class="bolder">
+                    <div class="center">
+                        -&nbsp; Запазване на информация; <br> -&nbsp; Извличане на запазената там информация; <br> -&nbsp; Модифициране на запазената там информация.
+                    </div>
+
+                </div>
+            </h2>
+        </div>
+
+        <br> <br> <br>
+        <div class="center bolder">
+            <h2>
+                <div class="borderSubTitle text-center">
+                    Именуване на променлива
+                </div>
+                <div class="center">
+                    <br> Името може да бъде всякакво по наш избор, но трябва да следва определени правила: <br>
+                </div>
+                <div class="center">
+                    <br> - Имената на променливите се образуват от буквите a-z, A-Z, цифрите 0-9, както и символите $ и _.
+                    <br> - Имената на променливите не може да започват с цифра.
+                    <br> - Имената на променливите не могат да съвпадат със служебна дума (keyword) от езика Java:
+                </div>
+            </h2>
+        </div>
+        <br> <br>
+        <div class="center bolder">
+            <h2>
+                <div class="borderSubTitle text-center">
+                    Деклариране на променливи
+                </div>
+                <div class="center">
+                    <br> Когато декларираме променлива, ние: <br>
+                </div>
+                <div class="center">
+                    <br> - Задаваме нейния тип;
+                    <br> - Задаваме нейното име (наречено идентификатор);
+                    <br> - Може да дадем начална стойност, но не е задължително.
+                </div>
+            </h2>
+        </div>
+        <div class="bolder center">
+            <h2>
+                <br> <br>
+                <div class="text-style">
+                    Ето какъв е синтаксисът за деклариране на променливи:
+                </div>
+                <div class="borderBoxWhite text-center">
+                    <span><тип данни><идентификатор> [= <инициализация>]
+                  </span>
+                </div>
+
+            </h2>
+
+        </div>
+
+
+        <div class="bolder center">
+            <h2>
+                <br> <br>
+                <div class="text-style"> Правилно декларирани променливи:</div>
+                <span class="borderBoxWhite  center">
+                 int myNum = 5;
+                <br> float myFloatNum = 5.99f;
+                <br> char myLetter = 'D';
+                <br> boolean myBool = true;
+                <br> String myText = "Hello";
+              </span>
+
+            </h2>
+        </div>
+
+        <br> <br> <br>
+        <div class="content"></div>
+
+        <div class="center bolder">
+            <h2>
+                <div class="borderSubTitle text-center">
+                    Стойностни и референтни типове
+                </div>
+
+                <div class="center text-style">
+                    <br> Типовете данни в Java са 2 вида: стойностни и референтни. <br> <br>
+                </div>
+
+                <div class="center text-style">
+                    Стойностните типове (value types) се съхраняват в стека за изпълнение на програмата и съдържат директно стойността си. Такива променливи заемат 1, 2, 4 или 8 байта в стека. Те се освобождават при излизане от обхват. <br> <br>
+                </div>
+
+                <div class="center text-style">
+                    Референтните типове (reference types) съхраняват в стека за изпълнение на програмата референция към динамичната памет (т. нар. heap), където се съхранява реалната им стойност. Референцията представлява указател (адрес на клетка от паметта), сочещ реалното
+                    местоположение на стойността в динамичната памет.Референтните типове заделят динамична памет при създаването си и се освобождават по някое време от системата за почистване на паметта (garbage collector), когато тя установи, че вече
+                    не се използват от програмата.
+                </div>
+            </h2>
+
+        </div>
+
+
+    </div>
+
 </div>

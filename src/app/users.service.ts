@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { collection, doc, docData, Firestore, getDocs, setDoc, updateDoc } from '@angular/fire/firestore';
+import { collection, deleteDoc, doc, docData, Firestore, getDocs, setDoc, updateDoc } from '@angular/fire/firestore';
 import { from, Observable, of, switchMap } from 'rxjs';
 import { ProfileUser } from './models/user-profile';
 import { AuthenticationService } from './services/authentication.service';
@@ -44,7 +44,6 @@ export class UserService {
    }
    console.log(usersId);
    return usersId;
-
  }
 
 
@@ -55,8 +54,14 @@ export class UserService {
     return from(setDoc(ref,user));
   }
 
+  deleteUser(user: ProfileUser) : Observable<any>{
+    const ref=doc(this.firestore,'users',user?.uid);
+    return from(deleteDoc(ref));
+  }
+
   updateUser(user: ProfileUser) : Observable<any>{
     const ref=doc(this.firestore,'users',user?.uid);
     return from(updateDoc(ref,{ ...user }));
   }
+
 }

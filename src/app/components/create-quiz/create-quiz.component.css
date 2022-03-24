@@ -1,11 +1,16 @@
+body {
+    background: brown;
+}
+
 .content {
     padding: 32px;
 }
 
 .form-control {
     display: block;
-    margin: 30px;
-    width: 90%;
+    margin: 20px;
+    width: 100%;
+    margin-left: 0px;
 }
 
 .beginning-text {
@@ -18,7 +23,6 @@
     border-radius: 16px;
     display: block;
     width: 37%;
-    margin-left: 470px;
 }
 
 .center-options {
@@ -39,6 +43,8 @@
 .button-positionInfo {
     position: absolute;
     right: 0;
+    z-index: 2;
+    margin-right: 15.7px;
     bottom: 20px;
     margin-bottom: 100px;
 }
@@ -48,7 +54,7 @@
 .button-position {
     position: absolute;
     right: 0;
-    margin: 20px;
+    padding-right: 15.7px;
 }
 
 .formContainer {
@@ -69,7 +75,7 @@
 
 .form-questionTitle {
     display: block;
-    margin: 10px;
+    margin-right: 35px;
     width: 90%;
 }
 
@@ -91,6 +97,7 @@
 
 .static {
     position: fixed;
+    margin: 20px;
 }
 
 .checkboxPosition {
@@ -102,4 +109,59 @@
 
 .mat-checkbox-inner-container-no-side-margin {
     margin-right: 0;
+}
+
+.backgroundQuestion {
+    width: 600px;
+    background-color: rgb(128, 222, 217);
+}
+
+.whiteBackground {
+    width: 600px;
+    background-color: rgb(174, 236, 239);
+}
+
+.marginLeft {
+    position: sticky;
+    margin-left: 80px;
+}
+
+.backgroundScreen {
+    background-color: rgb(174, 236, 239);
+}
+
+.margin {
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+
+.borderBoxQuestionDetails {
+    width: 800px;
+    margin-left: 15px;
+    box-shadow: 1px 1px 1px 1px rgba(128, 222, 217, 0.801);
+    border: 3px solid rgb(128, 222, 217);
+}
+
+.borderBoxQuestionTitle {
+    width: 500px;
+    margin-left: 15px;
+    box-shadow: 1px 1px 1px 1px rgba(128, 222, 217, 0.801);
+    border: 3px solid rgb(128, 222, 217);
+}
+
+.borderBox {
+    width: 400px;
+    box-shadow: 1px 1px 1px rgba(128, 222, 217, 0.801);
+    border: 3px solid rgb(128, 222, 217);
+}
+
+.spaceBetweenBoxes {
+    padding: 26px;
+}
+
+.mat-divider {
+    width: 100%;
+    height: 3px;
+    background-color: rgb(128, 222, 217);
+    box-shadow: 1px 1px rgba(128, 222, 217, 0.363);
 }

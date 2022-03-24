@@ -1,6 +1,6 @@
 <mat-nav-list class="form">
     <div class="logo">
-        <img src="../assets/img/QuizLogoNew.png" style="width:20%; height:20%" alt="Quiz App Logo"> uizo Bg
+        <img src="../assets/img/QuizLogoNew.png" style="width:20%; height:20%" alt="Quiz App Logo" routerLink="/landing"> uizo Bg
     </div>
     <mat-divider></mat-divider>
 
@@ -9,26 +9,20 @@
         <mat-icon class="form-icon form">home</mat-icon>Начало</a>
 
     <a mat-list-item routerLink="/createQuiz" routerLinkActive="list-item-active">
-        <mat-icon class="form-icon form">build icon</mat-icon>Създай тест</a>
+        <mat-icon class="form-icon form">add_circle_outline</mat-icon>Създай тест</a>
 
     <a mat-list-item routerLink="/quizes" routerLinkActive="list-item-active">
-        <mat-icon class="form-icon form">poll icon</mat-icon>Реши тест</a>
+        <mat-icon class="form-icon form">library_books</mat-icon>Реши тест</a>
 
 
 
     <mat-tree mat-list-item [dataSource]="dataSource" [treeControl]="treeControl">
-        <!-- This is the tree node template for leaf nodes -->
         <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
-            <!-- use a disabled button to provide padding for tree leaf -->
             <button mat-icon-button disabled></button>
-            <a class="linksDesign center" mat-list-item (click)="navigateToPage(node.name)" routerLinkActive="list-item-active">
+            <a mat-list-item routerLinkActive="list-item-active" (click)="navigateToPage(node.name)">
                 <mat-icon class="form-icon form">poll icon</mat-icon>
                 {{node.name}}</a>
-
-
-
         </mat-tree-node>
-        <!-- This is the tree node template for expandable nodes -->
         <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
             <mat-icon class="form-icon-links form">school icon</mat-icon>
             <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.name">
@@ -37,16 +31,10 @@
               </mat-icon>
             </button> {{node.name}}
         </mat-tree-node>
-
     </mat-tree>
-
-    <a mat-list-item routerLink="/info" routerLinkActive="list-item-active">
-        <mat-icon class="form-icon form">info</mat-icon>Информация</a>
 
     <mat-divider></mat-divider>
 
     <a mat-list-item routerLink="/about" routerLinkActive="list-item-active">
         <mat-icon class="form-icon form">help</mat-icon>Помощ</a>
-
-
 </mat-nav-list>

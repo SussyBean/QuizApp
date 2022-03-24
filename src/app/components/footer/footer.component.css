@@ -23,6 +23,13 @@ mat-toolbar {
     left: 39%;
 }
 
+.text-style {
+    font-weight: lighter;
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    font-style: oblique;
+}
+
 .footer {
     position: relative;
     bottom: 0;

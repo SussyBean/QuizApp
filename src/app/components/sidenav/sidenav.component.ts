@@ -1,7 +1,9 @@
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { Component, OnInit } from '@angular/core';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import { Router, Routes } from '@angular/router';
+import { map, Observable, shareReplay } from 'rxjs';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { HomeComponent } from '../home/home.component';
 
@@ -22,11 +24,11 @@ const TREE_DATA: LanguageNode[] = [
     children: [
       {
         name: 'Java',
-        children: [{name: 'Tипове и променливи'}, {name: 'Оператори и изрази'}, {name: 'Условни конструкции'}, {name: 'Цикли '}, {name: 'Масиви'}],
+        children: [{name: 'Tипове и променливи'}, {name: 'Оператори и изрази'}, {name: 'Условни конструкции'}],
       },
       {
         name: 'JavaScript',
-        children: [{name: 'Прости пресмятания'}, {name: 'По-сложни проверки'},{name: 'Цикли'},{name: 'Функции'}],
+        children: [{name: 'Прости пресмятания'},{name: 'Функции'}],
       },
     ],
   },
@@ -41,7 +43,14 @@ const TREE_DATA: LanguageNode[] = [
 
 export class SidenavComponent implements OnInit {
 
-  constructor(private authService: AuthenticationService,private router:Router) {
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+  .pipe(
+    map(result => result.matches),
+    shareReplay()
+  );
+
+
+  constructor(private authService: AuthenticationService,private router:Router,private breakpointObserver: BreakpointObserver) {
     this.dataSource.data = TREE_DATA;
   }
   ngOnInit(): void {
@@ -76,12 +85,6 @@ export class SidenavComponent implements OnInit {
     case 'Условни конструкции':
       this.router.navigate(['/java-if']);
     break;
-    case 'Цикли ':
-      this.router.navigate(['/java-cycles']);
-    break;
-    case 'Масиви':
-      this.router.navigate(['/java-array']);
-    break;
     case 'Tипове и променливи':
       this.router.navigate(['/java-types-variables']);
      break;
@@ -89,12 +92,6 @@ export class SidenavComponent implements OnInit {
    case 'Прости пресмятания':
       this.router.navigate(['/javascript-easy-calculations']);
      break;
-    case 'По-сложни проверки':
-      this.router.navigate(['/javascript-complicated-conditions']);
-    break;
-    case 'Цикли':
-      this.router.navigate(['/javascript-loops']);
-    break;
     case 'Функции':
       this.router.navigate(['/javascript-functions']);
     break;

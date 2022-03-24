@@ -28,18 +28,21 @@ mat-divider {
 }
 
 :hover.mat-list-item {
-    background: rgb(137, 128, 221) !important;
+    color: rgb(0, 0, 0);
+    font-weight: bolder;
+    background: rgb(128, 222, 217) !important;
 }
 
 .mat-tree-node {
-    background-color: rgb(93, 160, 172) !important;
-    border-color: rgb(93, 160, 172) !important;
+    padding-left: 0px !important;
+    background-color: rgb(17, 157, 164) !important;
+    border-color: rgb(17, 157, 164) !important;
     font-size: 1rem;
     height: 44px !important;
 }
 
 .mat-tree-node:hover {
-    background: rgb(137, 128, 221) !important;
+    background: rgb(128, 222, 217)!important;
     font-weight: bolder;
     color: rgb(0, 0, 0) !important;
 }

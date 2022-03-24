@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FirebaseApp } from '@angular/fire/app';
 import { ActivatedRoute } from '@angular/router';
 import { interval } from 'rxjs';
 import { iQuiz, QuizService } from 'src/app/services/quiz.service';
+import { ResultService } from 'src/app/services/result.service';
+import { UserService } from 'src/app/users.service';
 
 @Component({
   selector: 'app-quiz-solve-questions',
@@ -26,9 +29,7 @@ export class QuizSolveQuestionsComponent implements OnInit {
   isQuizCompleted: boolean=false;
   interval$:any;
   progress:string="0";
-  constructor(private quizService: QuizService,private route:ActivatedRoute) {
-
-
+  constructor(private quizService: QuizService,private route:ActivatedRoute,private resultService: ResultService,private usersService:UserService) {
   }
 
   ngOnInit(): void {
@@ -66,6 +67,19 @@ export class QuizSolveQuestionsComponent implements OnInit {
     if(this.quiz && currentQno === this.quiz.questions.length-1){
       setTimeout(() => {
         this.isQuizCompleted=true;
+
+      this.getTitleOfQuiz = this.quizService.titleOfQuiz;
+      this.points;
+
+        this.usersService.currentUserProfile$.subscribe(
+          (res) => {
+            var rid = res!.uid;
+            // this.resultService.addResultOfQuiz({ rid, quiz });
+          },
+          (err) => console.log(err),
+          () => console.log('done!')
+        );
+
         this.stopCounter();
       },300)
 
@@ -140,6 +154,8 @@ export class QuizSolveQuestionsComponent implements OnInit {
     if(this.quiz)
     this.progress=((this.currentQuestion/this.quiz.questions.length)*100).toString();
   }
+
+
 
 
 

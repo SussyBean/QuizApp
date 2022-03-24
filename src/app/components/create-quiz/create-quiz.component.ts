@@ -20,6 +20,9 @@ import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { QuizService } from 'src/app/services/quiz.service';
 import { UserService } from 'src/app/users.service';
 import { saveAs } from 'file-saver';
+import { ConfirmDialogComponent, ConfirmDialogModel } from '../confirm-dialog/confirm-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { PopUpDialogComponent, PopUpDialogModel } from '../pop-up-dialog/pop-up-dialog.component';
 
 export function numberOfQuestionsValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -60,8 +63,7 @@ export function initAnswer(answers?: Partial<Answer>): Answer {
   styleUrls: ['./create-quiz.component.css'],
 })
 export class CreateQuizComponent implements OnInit {
-  // title = 'json-file-read-angular';
-  // public countryList:{name:string, code:string}[] = countries;
+  result: string = '';
 
   user$ = this.usersService.currentUserProfile$;
 
@@ -77,6 +79,7 @@ export class CreateQuizComponent implements OnInit {
   autoCompleteCtrl = new FormControl('', [Validators.required]);
   row = document.createElement('div');
   index = -1;
+  counter=0;
 
   questions: Question[] = [];
 
@@ -135,7 +138,8 @@ export class CreateQuizComponent implements OnInit {
     private router: Router,
     private el: ElementRef,
     private quizService: QuizService,
-    private usersService: UserService
+    private usersService: UserService,
+    public dialog: MatDialog
   ) {
     this.filteredLanguages = this.languageCtrl.valueChanges.pipe(
       startWith(null),
@@ -234,6 +238,7 @@ export class CreateQuizComponent implements OnInit {
   }
 
   addNewQuestion() {
+    this.counter++;
     let questionsArray = this.quizForm.get("questions") as FormArray;
     this.questionArrayDelete=questionsArray;
     questionsArray.push(
@@ -248,29 +253,56 @@ export class CreateQuizComponent implements OnInit {
 
     )
 
-
-/*
-    this.questions.push({
-      title: '',
-      answers: [initAnswer(), initAnswer(), initAnswer(), initAnswer()],
-    });
-    console.log(this.questions.length);
-    */
   }
 
   deleteQuestion(i: number) {
+    this.counter--;
     this.questionArrayDelete.removeAt(i);
+  }
+
+  confirmDialog(): void {
+    const message = `Сигурен ли сте,че искате да запазите теста?`;
+    const message2= `Тестът трябва да съдържа поне три въпроса,с избрани правилни отговори,както и необходимата допълнителна информация, за да го запазите`;
+
+    const dialogDataConfirm = new ConfirmDialogModel("Запази теста", message);
+    const dialogDataPop = new PopUpDialogModel("Внимание",message2);
+
+    // const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+    //   maxWidth: "400px",
+    //   data: dialogDataConfirm
+    // });
+
+    const dialogRefPopUp = this.dialog.open(PopUpDialogComponent, {
+      maxWidth: "400px",
+      data: dialogDataPop
+    });
+
+
+    // if(this.counter<=0){
+    //   dialogRefPopUp.close(true);
+    //   return;
+    // }
+      // if (!this.quizForm.valid && this.counter==0) {
+      //   dialogRef.close(false);
+      // }
+
+
   }
 
   saveQuiz() {
     for (let i = 0; i < this.questions.length; i++) {
       console.log(this.questions[i].answers[i].rightAnswer);
     }
-    if (!this.quizForm.valid) {
+    console.log(this.counter);
+
+    if (!this.quizForm.valid || this.counter<3) {
+      this.confirmDialog();
       return;
     }
 
+
     let data = this.quizForm.value;
+
     data['languages'] = this.languages;
 
     const quiz = [

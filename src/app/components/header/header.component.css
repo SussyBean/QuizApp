@@ -27,6 +27,10 @@ li {
     margin-left: 400px;
 }
 
+.isOpen {
+    overflow: hidden;
+}
+
 
 /* .fixedPos {
     position: fixed;
