@@ -66,12 +66,9 @@ table {
     text-align: justify;
 }
 
-.bolder {
-    font-weight: bolder;
-}
-
 .borderBoxWhite {
     border: 2px solid black;
+    padding: 30px;
     background-color: rgb(255, 255, 255);
 }
 
@@ -83,4 +80,45 @@ table {
     border: 2px solid black;
     text-shadow: 1px 2px 2px rgb(0, 0, 0);
     border-radius: 10px;
+}
+
+.spaceParagraphs {
+    padding: 30px;
+}
+
+.smaller {
+    width: 55%;
+    font-weight: bolder;
+}
+
+.larger {
+    width: 80%;
+    font-weight: bolder;
+}
+
+table {
+    font-weight: bolder;
+    box-shadow: none;
+    background-color: rgb(231, 236, 236);
+    width: 100%;
+}
+
+.textAlignJustify {
+    text-align: justify;
+}
+
+.bolder {
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.text-style {
+    margin: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px rgb(255, 255, 255);
+}
+
+.textTitle {
+    font-size: 25px;
 }

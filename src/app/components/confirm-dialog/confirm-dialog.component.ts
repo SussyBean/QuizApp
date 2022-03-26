@@ -24,11 +24,7 @@ export class ConfirmDialogComponent implements OnInit {
 
 
   onConfirm(): void {
-    this.obj.saveQuiz();
     this.dialogRef.close(true);
-    setTimeout(() => {
-      window.location.href = '/createQuiz';
-    }, 1_000);
   }
 
 

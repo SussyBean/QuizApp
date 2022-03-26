@@ -16,9 +16,7 @@
             </ol>
 
             <div class="spaceBetween"></div>
-            <!-- <div class="text-center">
-            <button class="btn btn-primary btn-lg" routerLink="/solveQuestions" (click)="showQuizes()">Започни теста</button>
-        </div> -->
+
             <div class="text-center">
                 <h1 class="goodLuck">Успех</h1>
             </div>
@@ -29,14 +27,16 @@
     <div class="spaceBetween"></div>
 
 
-    <div class="content" style="padding-top: 96px !important;" *ngIf="!isLoading">
+    <div class="content margin" style="padding-top: 96px !important;" *ngIf="!isLoading">
 
         <table mat-table [dataSource]="quizes" class="mat-elevation-z8" style="width: 100%;">
 
 
             <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef> Име на теста </th>
-                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                <div class="position">
+                    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                </div>
             </ng-container>
 
             <ng-container matColumnDef="description">
@@ -56,7 +56,17 @@
 
             <ng-container matColumnDef="button">
                 <th mat-header-cell *matHeaderCellDef></th>
-                <td mat-cell *matCellDef="let element"> <button mat-raised-button color="primary" routerLink="/quizes/{{element.id}}">Реши</button></td>
+                <td mat-cell *matCellDef="let element">
+                    <div class="toPosition">
+                        <button mat-raised-button color="primary" routerLink="/quizes/{{element.id}}">Реши</button>
+                        <ng-container *ngIf="authService.isCurrentUserAdmin()">
+                            <br> <br>
+                            <button mat-raised-button color="warn" (click)="deleteQuiz(element)">Изтрий</button>
+                        </ng-container>
+
+                    </div>
+
+                </td>
             </ng-container>
 
 

@@ -64,12 +64,13 @@ export class ProfileComponent implements OnInit {
     ).subscribe()
   }
 
-  // deleteUser(user: ProfileUser){
-  //   this.usersService.deleteUser({uid:user.uid}).pipe(this.toast.observe({
+  // deleteUser(user:ProfileUser){
+  //   this.usersService.deleteUser(user).pipe(this.toast.observe({
   //     loading:'We are deleteing your profile',
   //     success:'Data deleted!',
   //     error: 'There was an error in updating data'
   //   }));
+  //   this.authService.signOut();
   // }
 
 }

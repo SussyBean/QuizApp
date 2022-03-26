@@ -1,5 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 
+export interface EqualsSymbols {
+  operator: string;
+  action: string;
+}
+
+const operatorsSymbol: EqualsSymbols[] = [
+  {operator: '==',action:'равно'},
+  {operator: '!=',action:'различно'},
+  {operator: '>',action:'по-голямо'},
+  {operator: '>=',action:'по-голямо или равно'},
+  {operator: '<',action:'по-малко'},
+  {operator: '<=',action:'по-малко или равно'},
+];
+
+
+
 @Component({
   selector: 'app-java-conditions-if-statements',
   templateUrl: './java-conditions-if-statements.component.html',
@@ -7,9 +23,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class JavaConditionsIfStatementsComponent implements OnInit {
 
-  constructor() { }
+  public displayedColumns = ["operator","action"];
+  panelOpenState = false;
+  dataSource = operatorsSymbol;
 
-  ngOnInit(): void {
-  }
+  constructor() {}
+
+  ngOnInit(): void {}
+
 
 }

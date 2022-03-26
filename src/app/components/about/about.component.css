@@ -43,3 +43,8 @@ mat-divider {
 .larger {
     font-size: 17px;
 }
+
+.margin {
+    margin-right: 300px;
+    margin-left: 300px;
+}

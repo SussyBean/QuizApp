@@ -23,6 +23,7 @@ import { saveAs } from 'file-saver';
 import { ConfirmDialogComponent, ConfirmDialogModel } from '../confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { PopUpDialogComponent, PopUpDialogModel } from '../pop-up-dialog/pop-up-dialog.component';
+import { QuizModel } from 'src/app/models/quiz';
 
 export function numberOfQuestionsValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -264,7 +265,7 @@ export class CreateQuizComponent implements OnInit {
     const message = `Сигурен ли сте,че искате да запазите теста?`;
     const message2= `Тестът трябва да съдържа поне три въпроса,с избрани правилни отговори,както и необходимата допълнителна информация, за да го запазите`;
 
-    const dialogDataConfirm = new ConfirmDialogModel("Запази теста", message);
+    // const dialogDataConfirm = new ConfirmDialogModel("Запази теста", message);
     const dialogDataPop = new PopUpDialogModel("Внимание",message2);
 
     // const dialogRef = this.dialog.open(ConfirmDialogComponent, {
@@ -319,7 +320,7 @@ export class CreateQuizComponent implements OnInit {
     this.usersService.currentUserProfile$.subscribe(
       (res) => {
         var uid = res!.uid;
-        this.quizService.addQuiz({ uid, quiz });
+        this.quizService.addQuiz(<QuizModel>{ uid, quiz });
       },
       (err) => console.log(err),
       () => console.log('done!')

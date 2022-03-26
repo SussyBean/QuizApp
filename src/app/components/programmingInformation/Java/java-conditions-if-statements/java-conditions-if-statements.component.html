@@ -23,6 +23,72 @@
                 <h1 style="font-weight:bold">Какво е условна конструкция?</h1>
             </div>
         </div>
+
+        <br> <br> <br> <br>
+
+        <div class="text-style spaceParagraphs center">
+            В тази секция ще бъдат разгледани шест оператора за сравнение:
+            <, <=,>, >=, == и !=. Операторите за сравнение винаги дават като резултат булева величина (true или false). <br> <br> Java има няколко оператора за сравнение, които могат да бъдат използвани за сравняване на всяка комбинация от цели числа, числа
+                с плаваща запетая или символи:
+        </div>
+        <div class="spaceBetween"></div>
+
+
+
+        <div class="center bolder">
+            Може да погледнете и таблица,в която всички те са изобразени.
+        </div>
+
+        <br> <br>
+
+        <div class="center">
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="smaller">
+                <mat-expansion-panel-header>
+                    Натиснете стрелката за да {{panelOpenState ? 'затворите' : 'отворите'}} таблицата
+                </mat-expansion-panel-header>
+
+                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                    <ng-container matColumnDef="operator">
+                        <div class="textAlignJustify">
+                            <th mat-header-cell *matHeaderCellDef style="font-weight:bolder"> Оператор </th>
+                        </div>
+                        <td mat-cell *matCellDef="let element"> {{element.operator}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="action">
+                        <div class="textAlignJustify">
+                            <th mat-header-cell *matHeaderCellDef style="font-weight:bolder"> Действие </th>
+                        </div>
+                        <td mat-cell *matCellDef="let element"> {{element.action}} </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </mat-expansion-panel>
+        </div>
+        <br> <br> <br> <br> <br>
+
+        <div class="center bolder">
+            Нека разгледаме примерен код затова как работят операторите, като създадем няколко променливи и извършим няколко операциии
+        </div>
+        <br> <br> <br>
+
+        <div class="center">
+            <div class="borderBoxWhite">
+                int weight = 700;
+                <br> <br> System.out.println(weight >= 500);
+                <br> <br>char sex = 'm';
+                <br> <br> System.out.println(sex
+                <='f' ); <br> <br>double colorWaveLength = 1.630;
+                    <br> <br> System.out.println(colorWaveLength > 1.621);
+            </div>
+
+        </div>
+
     </div>
+
+
 
 </div>

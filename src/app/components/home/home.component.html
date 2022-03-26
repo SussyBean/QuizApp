@@ -1,12 +1,42 @@
 <div class="backGround">
     <div class="spaceBetween"></div>
 
-    <div class="center margin-top content">
+    <div class="margin-top content">
 
-        <h1>Добре дошли във вашата лична страница</h1>
+        <ng-container *ngIf="!isEmpty">
+            <div class="center bolder">Виж резултатите си тук</div>
+            <div class="center">
+                <table mat-table [dataSource]="results" class="mat-elevation-z8" style="width: 100%;" *ngIf="!isLoading">
+                    <ng-container matColumnDef="quizName">
+                        <th mat-header-cell *matHeaderCellDef> Име на теста </th>
+                        <td mat-cell *matCellDef="let element"> {{element.quiz?.name}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="points">
+                        <th mat-header-cell *matHeaderCellDef> Точки </th>
+                        <td mat-cell *matCellDef="let element"> {{element.resultOfTest}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="date">
+                        <th mat-header-cell *matHeaderCellDef> Дата и час </th>
+                        <td mat-cell *matCellDef="let element"> {{ formatDate(element.dateAndHour)}} </td>
+                    </ng-container>
+
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </div>
+        </ng-container>
+
+
+        <ng-container *ngIf="isEmpty">
+            <div class="center bolder">
+                Все още не сте решили никакъв тест!
+            </div>
+        </ng-container>
 
     </div>
 
     <div class="spaceBetween"></div>
     <div class="spaceBetween"></div>
-</div>

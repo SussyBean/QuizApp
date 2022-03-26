@@ -5,3 +5,10 @@
 .backGround {
     background-color: rgb(32, 186, 197);
 }
+
+.bolder {
+    text-shadow: 1px 1px 1px white;
+    margin-bottom: 30px;
+    font-size: 25px;
+    font-weight: bolder;
+}

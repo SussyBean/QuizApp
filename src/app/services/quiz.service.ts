@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { from, Observable } from 'rxjs';
 import { addDoc, collection, doc } from 'firebase/firestore';
-import { Firestore, setDoc, getDocs } from '@angular/fire/firestore';
+import { Firestore, setDoc, getDocs, deleteDoc } from '@angular/fire/firestore';
 import { QuizModel } from '../models/quiz';
 
 export interface iQuizQestionOption {
@@ -132,6 +132,12 @@ export class QuizService {
     const docRef = await addDoc(collection(this.firestore, 'quizes'), { quiz });
     const ref = doc(this.firestore, 'quizes', docRef.id);
     return from(setDoc(ref, quiz, { merge: true }));
+  }
+
+   deleteQuiz(quiz: QuizModel) : Observable<any>{
+      console.log(`Delete quiz ${quiz.id}`);
+    const ref=doc(this.firestore,'quizes', <string> quiz?.id);
+    return from(deleteDoc(ref));
   }
 
 }

@@ -26,3 +26,18 @@
 .backGround {
     background-color: rgb(128, 222, 217);
 }
+
+.toPosition {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.margin {
+    margin-left: 50px;
+    margin-right: 70px;
+}
+
+.position {
+    text-align: justify;
+}

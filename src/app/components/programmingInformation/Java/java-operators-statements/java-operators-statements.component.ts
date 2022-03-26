@@ -5,13 +5,11 @@ import { Component, OnInit } from '@angular/core';
 export interface OperatorsSymbols {
   category: string;
   operator: string;
-
 }
 
 export interface OperatorsPriority {
   priority: string;
   operator: string;
-
 }
 
 const operatorsSymbol: OperatorsSymbols[] = [

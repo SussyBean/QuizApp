@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Auth,createUserWithEmailAndPassword,sendPasswordResetEmail,signInWithEmailAndPassword, updateProfile, UserInfo} from '@angular/fire/auth';
-import { confirmPasswordReset, sendEmailVerification, verifyPasswordResetCode } from 'firebase/auth';
+import { Auth,createUserWithEmailAndPassword,sendPasswordResetEmail,signInWithEmailAndPassword, signOut, updateProfile, user, UserInfo} from '@angular/fire/auth';
+import { confirmPasswordReset, deleteUser, sendEmailVerification, User, verifyPasswordResetCode } from 'firebase/auth';
 import { authState } from 'rxfire/auth';
 import { concatMap, from, Observable, of} from 'rxjs';
 
@@ -9,8 +9,15 @@ import { concatMap, from, Observable, of} from 'rxjs';
 })
 export class AuthenticationService {
   router: any;
+  user: User | null = this.auth.currentUser;
+  constructor(private auth: Auth) {
+    console.log('auth', auth);
+  }
 
-  constructor(private auth: Auth) { }
+  getCurrentUserUid(): string | undefined {
+    return this.auth.currentUser?.uid;
+  }
+
 
   currentUser$ = authState(this.auth);
 
@@ -20,6 +27,16 @@ export class AuthenticationService {
 
   login(username:string, password: string){
     return from(signInWithEmailAndPassword(this.auth,username,password));
+  }
+
+  isCurrentUserAdmin():boolean{
+     return this.getCurrentUserUid()=='gSs12m1E4PRiWIQmWCGJXuvV5VI3';
+  }
+
+
+
+  signOut(){
+    return from(signOut(this.auth));
   }
 
   logout(){
@@ -39,6 +56,7 @@ export class AuthenticationService {
        })
      )
   }
+
 
 
    confirmResetPassword(code: string,newPassword: string){
