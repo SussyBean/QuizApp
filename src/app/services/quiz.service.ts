@@ -4,6 +4,7 @@ import { from, Observable } from 'rxjs';
 import { addDoc, collection, doc } from 'firebase/firestore';
 import { Firestore, setDoc, getDocs, deleteDoc } from '@angular/fire/firestore';
 import { QuizModel } from '../models/quiz';
+import { UserService } from '../users.service';
 
 export interface iQuizQestionOption {
   text: string;
@@ -19,6 +20,8 @@ export interface iQuiz {
   description: string;
   languages: string[];
   questions: iQuizQestion[];
+  numberOfQuestions:number;
+  // nameOfCreator:string;
 }
 
 @Injectable({
@@ -29,7 +32,8 @@ export class QuizService {
   public titleOfQuiz!: string;
   public quizesId: any = [];
 
-  constructor(private http: HttpClient, private firestore: Firestore) {}
+  constructor(private http: HttpClient, private firestore: Firestore,private usersService: UserService) {
+  }
 
   getQuizJson() {
     return this.http.get<any>('assets/quizJson/Angular_Typescript.json');
@@ -57,12 +61,12 @@ export class QuizService {
       try {
         parsedQuiz = JSON.parse(row['quiz']);
       } catch (ex) {
-        console.error("Caan't parse the JSON", ex, row['quiz']);
+        console.error("Can't parse the JSON", ex, row['quiz']);
         return [];
       }
-      console.log(parsedQuiz);
 
       let questions: iQuizQestion[] = [];
+      let creatorName = this.usersService.getUsersId();
 
       for (let i in parsedQuiz['questions']) {
         let options: iQuizQestionOption[] = [];
@@ -93,16 +97,17 @@ export class QuizService {
         });
       }
 
+
       quizes.push({
         id: row['id'],
         name: parsedQuiz['titleOfQuiz'],
         description: parsedQuiz['description'],
         languages: parsedQuiz['languages'],
         questions: questions,
+        numberOfQuestions:questions.length,
       });
     }
 
-    console.log(quizes);
     return quizes;
   }
 
@@ -122,9 +127,11 @@ export class QuizService {
   async getQuizesInfo(){
     let quizes: iQuiz[] = await this.getQuizes();
     for(let j=0;j<quizes.length;j++){
-      this.quizesId[j]=quizes[j].name;
+      const idS = quizes[j].id;
+      return idS;
     }
-    return this.quizesId;
+    return null;
+
   }
 
 
@@ -135,7 +142,6 @@ export class QuizService {
   }
 
    deleteQuiz(quiz: QuizModel) : Observable<any>{
-      console.log(`Delete quiz ${quiz.id}`);
     const ref=doc(this.firestore,'quizes', <string> quiz?.id);
     return from(deleteDoc(ref));
   }

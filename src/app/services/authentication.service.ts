@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Auth,createUserWithEmailAndPassword,sendPasswordResetEmail,signInWithEmailAndPassword, signOut, updateProfile, user, UserInfo} from '@angular/fire/auth';
 import { confirmPasswordReset, deleteUser, sendEmailVerification, User, verifyPasswordResetCode } from 'firebase/auth';
 import { authState } from 'rxfire/auth';
+// import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { concatMap, from, Observable, of} from 'rxjs';
 
 @Injectable({
@@ -10,7 +11,7 @@ import { concatMap, from, Observable, of} from 'rxjs';
 export class AuthenticationService {
   router: any;
   user: User | null = this.auth.currentUser;
-  constructor(private auth: Auth) {
+  constructor(private auth: Auth/*, private afAuth: AngularFireAuth*/) {
     console.log('auth', auth);
   }
 
@@ -69,6 +70,8 @@ export class AuthenticationService {
       this.router.navigate(['/email-verify'])
     }));
   }
+
+
 
 
 }

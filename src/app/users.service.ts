@@ -43,7 +43,6 @@ export class UserService {
    for(let i of this.usersInfo){
      usersId.push({uid: i['uid']})
    }
-   console.log(usersId);
    return usersId;
  }
 
@@ -54,11 +53,6 @@ export class UserService {
     const ref=doc(this.firestore,'users',user?.uid);
     return from(setDoc(ref,user));
   }
-
-  // deleteUser(user: ProfileUser) : Observable<any>{
-  //   const ref=doc(this.firestore,'users',user?.uid);
-  //   return from(deleteDoc(ref));
-  // }
 
   updateUser(user: ProfileUser) : Observable<any>{
     const ref=doc(this.firestore,'users',user?.uid);

@@ -87,6 +87,7 @@ import { PopUpDialogComponent } from './components/pop-up-dialog/pop-up-dialog.c
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -177,7 +178,8 @@ import { PopUpDialogComponent } from './components/pop-up-dialog/pop-up-dialog.c
     provideMessaging(() => getMessaging()),
     provideStorage(() => getStorage()),
     LayoutModule,
-    MatDialogModule
+    MatDialogModule,
+
 
 
 

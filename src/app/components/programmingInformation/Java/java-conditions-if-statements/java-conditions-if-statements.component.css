@@ -13,8 +13,9 @@
 
 .img {
     margin: 7px;
-    width: 80%;
+    width: 40%;
     border-radius: 30px;
+    box-shadow: 1px 1px 1px 4px black;
 }
 
 mat-divider {
@@ -68,7 +69,7 @@ table {
 
 .borderBoxWhite {
     border: 2px solid black;
-    padding: 30px;
+    padding: 40px;
     background-color: rgb(255, 255, 255);
 }
 
@@ -121,4 +122,80 @@ table {
 
 .textTitle {
     font-size: 25px;
+}
+
+.tp-wrapper {
+    -webkit-perspective: 800px;
+    perspective: 800px;
+}
+
+.tp-box {
+    position: relative;
+    width: 700px;
+    height: 460px;
+    margin: 3rem auto;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform: transform 1s;
+    -ms-transform: transform 1s;
+    transform: transform 1s;
+}
+
+.tp-box:hover {
+    background: black;
+    opacity: 1;
+}
+
+.tp-box__side {
+    font-weight: bolder;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    color: rgb(0, 0, 0);
+    line-height: 20px;
+    font-size: 15px;
+    margin-right: 20px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.tp-box__front {
+    background: rgb(255, 255, 255);
+    -webkit-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    transform: rotateY(0deg);
+}
+
+.tp-box__back {
+    background: white;
+    -webkit-transform: rotateY(-180deg);
+    -ms-transform: rotateY(-180deg);
+    transform: rotateY(-180deg);
+}
+
+.floatLeft {
+    margin-right: 300px;
+    right: 0;
+    position: absolute;
+}
+
+.hide {
+    display: none;
+}
+
+.floatLeft:hover+.hide {
+    z-index: 2;
+    display: block;
+    right: 0;
+    position: absolute;
+    margin: 24px 40px;
+}
+
+.alignJusify {
+    text-align: justify;
 }

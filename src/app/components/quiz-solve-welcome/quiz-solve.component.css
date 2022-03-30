@@ -34,10 +34,17 @@
 }
 
 .margin {
-    margin-left: 50px;
     margin-right: 70px;
 }
 
-.position {
+.alignJustifyDescription {
+    margin-right: 30px;
+    width: 450px;
+    text-align: justify;
+}
+
+.alignJustifyTitles {
+    margin-right: 30px;
+    width: 200px;
     text-align: justify;
 }

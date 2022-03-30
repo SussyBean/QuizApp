@@ -59,8 +59,6 @@ export class LoginComponent implements OnInit {
 
 
   const{email,password} = this.loginForm.value;
-  console.log(email)
-  console.log(password)
 
 
    this.authService.login(email,password).pipe(

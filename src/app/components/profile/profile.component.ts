@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HotToastService } from '@ngneat/hot-toast';
 import { HotToastComponent } from '@ngneat/hot-toast/lib/components/hot-toast/hot-toast.component';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -19,6 +19,8 @@ import { UserService } from 'src/app/users.service';
 })
 export class ProfileComponent implements OnInit {
 
+  MOBILE_PATTERN = /[0-9\+\-\ ]/;
+
    user$=this.usersService.currentUserProfile$;
 
    profileForm = new FormGroup({
@@ -26,7 +28,7 @@ export class ProfileComponent implements OnInit {
     displayName: new FormControl(''),
     firstName: new FormControl(''),
     lastName: new FormControl(''),
-    phone: new FormControl(''),
+    phone: new FormControl('',[Validators.pattern(this.MOBILE_PATTERN)]),
     hobbies: new FormControl(''),
   });
 
@@ -64,13 +66,5 @@ export class ProfileComponent implements OnInit {
     ).subscribe()
   }
 
-  // deleteUser(user:ProfileUser){
-  //   this.usersService.deleteUser(user).pipe(this.toast.observe({
-  //     loading:'We are deleteing your profile',
-  //     success:'Data deleted!',
-  //     error: 'There was an error in updating data'
-  //   }));
-  //   this.authService.signOut();
-  // }
 
 }

@@ -64,6 +64,11 @@
     float: left;
 }
 
+.containerDescriptionLastText {
+    width: 70%;
+    float: left;
+}
+
 .positionImage {
     float: left;
     width: 30%;

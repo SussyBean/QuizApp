@@ -69,12 +69,11 @@
 
                 <div class="result text-center col-sm-12">
                     <h3>Поздравления, ти изпълни теста <br>Виж резултата си по долу</h3>
-                    <p>Брой въпроси,съдържащи се в теста:{{quiz.questions.length}}</p>
-                    <p>Брой правилно отговорени въпроси:{{correctAnswer}}</p>
-                    <p>Брой неправилно отговорени въпроси:{{incorrectAnswer}}</p>
-                    <p>Брой въпроси,отговорени общо:{{correctAnswer+incorrectAnswer}}</p>
-                    <p>Брой точки:{{points}}</p>
-
+                    <p>Брой въпроси,съдържащи се в теста: &nbsp;{{quiz.questions.length}}</p>
+                    <p>Брой правилно отговорени въпроси: &nbsp;{{correctAnswer}}</p>
+                    <p>Брой неправилно отговорени въпроси: &nbsp;{{incorrectAnswer}}</p>
+                    <p>Брой въпроси,отговорени общо: &nbsp;{{correctAnswer+incorrectAnswer}}</p>
+                    <p>Брой точки:&nbsp; {{points}}/{{maxPoints}}</p>
                     <button color="primary" mat-raised-button routerLink="/quizes">Върни се обратно</button>
                 </div>
 

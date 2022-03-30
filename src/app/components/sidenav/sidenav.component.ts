@@ -28,7 +28,7 @@ const TREE_DATA: LanguageNode[] = [
       },
       {
         name: 'JavaScript',
-        children: [{name: 'Прости пресмятания'},{name: 'Функции'}],
+        children: [{name: 'Функции'}],
       },
     ],
   },
@@ -87,10 +87,6 @@ export class SidenavComponent implements OnInit {
     break;
     case 'Tипове и променливи':
       this.router.navigate(['/java-types-variables']);
-     break;
-
-   case 'Прости пресмятания':
-      this.router.navigate(['/javascript-easy-calculations']);
      break;
     case 'Функции':
       this.router.navigate(['/javascript-functions']);

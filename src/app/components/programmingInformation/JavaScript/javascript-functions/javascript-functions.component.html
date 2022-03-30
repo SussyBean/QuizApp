@@ -1,1 +1,100 @@
-<p class="titleMain center">Функции в JavaScript</p>
+<div class="backGround content">
+    <div class="text-center content">
+
+
+        <img src="assets/img/function-declaration.png" class="img">
+
+
+        <div class="spaceBetween"></div>
+
+        <div class="title spaceBetween">Функции в JavaScript</div>
+
+        <div class="center">
+            <mat-divider></mat-divider>
+        </div>
+        <div class="spaceBetween"></div>
+
+    </div>
+    <br>
+
+
+    <div class="list">
+        <div class="center">
+            <div class="text-styleTitle borderBox spaceBetween">
+                <h1 style="font-weight:bold">Какво е функция в JavaScript?</h1>
+            </div>
+        </div>
+
+        <br> <br> <br>
+
+        <div class="center bolder" style="font-style:italic">
+            Функциите са едни от основните градивни елементи в JavaScript.
+        </div>
+        <div class="center">
+            <div class="text-style">
+                <br> Те са подобни на процедурите – набор от изрази, които изпълняват задача или изчисляват стойност, но за да се квалифицира процедурата като функция, тя трябва да вземе някакъв вход и да върне изход. <br> За да може една функция да се
+                използва,то тя трябва да бъде дефинирана в обхвата, от който тя се извиква. <br>
+            </div>
+        </div>
+        <br><br><br><br><br>
+
+        <br>
+        <div class="center">
+            <div class="spaceParagraphs borderBoxWhite text-style">Как се дефинира функция?</div>
+        </div>
+
+
+        <div class="center">
+            <div class="text-style">
+                <br> Дефиницията на функция (наричана още декларация на функция или израз на функция) се състои от ключовата дума на функцията, последвана от:
+                <br>
+                <br> &nbsp;- Името на функцията.
+                <br> &nbsp;- Списък с параметри на функцията, затворени в скоби и разделени със запетаи.
+                <br> &nbsp;- Изявленията на JavaScript, които дефинират функцията, затворени в къдрави скоби.
+            </div>
+        </div>
+        <br><br>
+        <div class="center bolder" style="font-size:17px">
+            <br> На долния пример можем да разгледаме проста функция, която ни връща квадрата на число
+        </div>
+        <br><br>
+        <div class="center">
+            <div class="spaceParagraphs borderBoxWhite text-style">
+                function square(number) &#10100; <br> <br> return number * number; <br> <br> &#x2775;
+            </div>
+        </div>
+        <br><br>
+        <div class="center">
+            <div class="text-style ">
+                Функцията square(квадрат) приема един параметър,с име number (число). <br> Функцията се състои от едно твърдение (statement), което казва да върне параметъра на функцията (number), умножен по себе си. Именно със специалната дума return
+                се връща квадрата на това число.
+            </div>
+        </div>
+
+
+        <div class="center">
+            <div class="text-style">
+                Параметрите по същество се предават на функциите по стойност, т.е ако в тялото на функция параметъра,подаден на функцията, присвои напълно нова стойност, то тази промяна не се отразява глобално, а вътре в самата функция.
+            </div>
+        </div>
+
+        <br><br><br>
+        <div class="center">
+            <div style="font-size:18px">
+                Но когато като параметър се подава <span class="bolder"> обект </span> и вътре в функцията се променят свойствата на този обект,то тези промена <span class="bolder"> СА</span> видими извън функцията, както е показано в следващия пример:
+            </div>
+        </div>
+        <br><br><br>
+
+        <div class="center">
+            <div class="spaceParagraphs borderBoxWhite text-style">
+                function myFunc(theObject) &#10100; <br> <br> theObject.make = 'Toyota'; Параметърът взима стойност Toyota<br> <br> &#x2775; <br> <br> var mycar = &#10100; &nbsp;make: 'Honda', model: 'Accord', year: 1998 &nbsp;&#x2775;&nbsp;; <br> <br>                var x, y; x = mycar.make; //&nbsp; Променливата х присвоява стойността Honda
+                <br> <br> myFunc(mycar);
+                <br> <br> y = mycar.make; // Променливата y присвоява стойността Toyota <br> <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                //&nbsp;(свойството make се променя от функцията и може да се използва)
+            </div>
+        </div>
+
+    </div>
+
+</div>

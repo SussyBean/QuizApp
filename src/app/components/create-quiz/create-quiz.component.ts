@@ -265,36 +265,21 @@ export class CreateQuizComponent implements OnInit {
     const message = `Сигурен ли сте,че искате да запазите теста?`;
     const message2= `Тестът трябва да съдържа поне три въпроса,с избрани правилни отговори,както и необходимата допълнителна информация, за да го запазите`;
 
-    // const dialogDataConfirm = new ConfirmDialogModel("Запази теста", message);
     const dialogDataPop = new PopUpDialogModel("Внимание",message2);
-
-    // const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-    //   maxWidth: "400px",
-    //   data: dialogDataConfirm
-    // });
 
     const dialogRefPopUp = this.dialog.open(PopUpDialogComponent, {
       maxWidth: "400px",
       data: dialogDataPop
     });
 
-
-    // if(this.counter<=0){
-    //   dialogRefPopUp.close(true);
-    //   return;
-    // }
-      // if (!this.quizForm.valid && this.counter==0) {
-      //   dialogRef.close(false);
-      // }
-
-
   }
 
   saveQuiz() {
+
+    if (confirm( `Искате ли да запазите ${this.titleOfQuiz?.value}?`)) {
     for (let i = 0; i < this.questions.length; i++) {
       console.log(this.questions[i].answers[i].rightAnswer);
     }
-    console.log(this.counter);
 
     if (!this.quizForm.valid || this.counter<3) {
       this.confirmDialog();
@@ -310,7 +295,6 @@ export class CreateQuizComponent implements OnInit {
       JSON.stringify(data),
     ];
 
-    console.log(quiz);
     var fr = new FileReader();
 
     fr.onload = function (evt) {
@@ -330,4 +314,5 @@ export class CreateQuizComponent implements OnInit {
       window.location.href = '/createQuiz';
     }, 1_000);
   }
+}
 }

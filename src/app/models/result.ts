@@ -7,6 +7,6 @@ export interface ResultModel{
   quiz?: iQuiz,
 
   //titleOfQuiz:string;
-  resultOfTest:number;
+  resultOfTest:string;
   dateAndHour?:any;
 }

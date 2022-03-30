@@ -22,6 +22,7 @@ export class QuizSolveQuestionsComponent implements OnInit {
   public currentQuestion: number = 0;
   public getTitleOfQuiz!: string;
   public points: number = 0;
+  public maxPoints!: number;
   counter = 60;
   correctAnswer: number = 0;
   incorrectAnswer: number = 0;
@@ -44,6 +45,11 @@ export class QuizSolveQuestionsComponent implements OnInit {
   getAllQuestions() {
     this.route.paramMap.subscribe(async (params) => {
       this.quiz = await this.quizService.getQuize(params.get('id') + '');
+
+      if(this.quiz){
+        this.maxPoints=this.quiz.questions.length*10;
+      }
+
       this.getTitleOfQuiz = await this.quizService.titleOfQuiz;
     });
   }
@@ -63,26 +69,19 @@ export class QuizSolveQuestionsComponent implements OnInit {
   }
 
   answer(currentQno: number, option: any) {
-    console.log('user', this.authenticationService.getCurrentUserUid());
-    console.log('isQuizCompleted', this.isQuizCompleted);
-    console.log('currentQuestion', this.currentQuestion);
 
     if (this.quiz && currentQno === this.quiz.questions.length - 1) {
       setTimeout(async () => {
-        console.log('isQuizCompleted');
-
 
         this.isQuizCompleted = true;
-
         this.getTitleOfQuiz = this.quizService.titleOfQuiz;
         this.points;
 
         await this.resultService.addResultOfQuiz({
           quizId: (<iQuiz>this.quiz).id,
-          uid: <string> this.authenticationService.getCurrentUserUid(), //тук
-          resultOfTest: this.points,
+          uid: <string> this.authenticationService.getCurrentUserUid(),
+          resultOfTest:""+this.points +"/"+ this.maxPoints,
         });
-
         this.stopCounter();
       }, 300);
     }
@@ -102,7 +101,7 @@ export class QuizSolveQuestionsComponent implements OnInit {
         this.resetCounter();
         this.getProgressPercent();
       }, 200);
-      this.points -= 10;
+      this.points += 0;
     }
   }
 
@@ -112,7 +111,7 @@ export class QuizSolveQuestionsComponent implements OnInit {
       if (this.counter === 0) {
         this.currentQuestion++;
         this.counter = 60;
-        this.points -= 10;
+        this.points += 0;
         this.getProgressPercent();
       }
     });

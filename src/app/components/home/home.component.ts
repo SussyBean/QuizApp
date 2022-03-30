@@ -1,4 +1,7 @@
+import { I } from '@angular/cdk/keycodes';
 import { Component, OnInit } from '@angular/core';
+import { window } from 'rxjs';
+import { QuizModel } from 'src/app/models/quiz';
 import { ResultModel } from 'src/app/models/result';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { iQuiz, QuizService } from 'src/app/services/quiz.service';
@@ -12,7 +15,8 @@ import { UserService } from 'src/app/users.service';
 })
 export class HomeComponent implements OnInit {
   public results: ResultModel[] = [];
-  public displayedColumns = ['quizName', 'points', 'date'];
+  public quizesIds: QuizModel[] = [];
+  public displayedColumns = ['quizName','points', 'date'];
   isLoading = true;
   isEmpty = true;
 
@@ -27,7 +31,6 @@ export class HomeComponent implements OnInit {
     this.resultService.getResults().then((results) => {
       this.usersService.currentUserProfile$.subscribe(
         async (res) => {
-
           let userResults: ResultModel[] = [];
           for (let index = 0; index < results.length; index++) {
             const result: ResultModel = results[index];
@@ -44,21 +47,18 @@ export class HomeComponent implements OnInit {
             }
           }
 
-          userResults = userResults.sort((a, b) => a.dateAndHour['seconds'] > b.dateAndHour['seconds'] ? -1 : 1 )
-
+          userResults = userResults.sort((a, b) =>
+            a.dateAndHour['seconds'] > b.dateAndHour['seconds'] ? -1 : 1
+          );
 
           this.results = userResults;
 
-          console.log('Length of results',this.results.length);
-
-          if(this.results.length != 0){
-            setTimeout(async () =>{
-              this.isEmpty=false;
-            },100)
+          if (this.results.length != 0) {
+            setTimeout(async () => {
+              this.isEmpty = false;
+            }, 100);
           }
-
           this.isLoading = false;
-          console.log(this.results);
         },
         (err) => console.log(err),
         () => console.log('done!')
@@ -73,6 +73,4 @@ export class HomeComponent implements OnInit {
   formatDate(date: any) {
     return new Date(date['seconds'] * 1000).toLocaleString();
   }
-
-
 }

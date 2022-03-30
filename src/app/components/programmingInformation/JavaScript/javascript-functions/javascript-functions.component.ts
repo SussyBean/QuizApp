@@ -10,6 +10,7 @@ export class JavascriptFunctionsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
 }

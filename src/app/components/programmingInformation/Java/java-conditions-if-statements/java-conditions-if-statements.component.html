@@ -1,7 +1,10 @@
 <div class="backGround content">
 
     <div class="text-center content">
-        <img src="assets/img/JavaLogo.jpg" class="img">
+        <div class="spaceBetween"></div>
+
+
+        <img src="assets/img/if-else-image.png" class="img">
 
 
         <div class="spaceBetween"></div>
@@ -75,18 +78,333 @@
         </div>
         <br> <br> <br>
 
+
+        <mat-icon class="floatLeft">priority_high</mat-icon>
+        <div class="hide alignJusify borderBoxWhite">Натисни кутията, за да видиш резултата от кода</div>
+
+
         <div class="center">
-            <div class="borderBoxWhite">
-                int weight = 700;
-                <br> <br> System.out.println(weight >= 500);
-                <br> <br>char sex = 'm';
-                <br> <br> System.out.println(sex
-                <='f' ); <br> <br>double colorWaveLength = 1.630;
-                    <br> <br> System.out.println(colorWaveLength > 1.621);
+            <div class="tp-wrapper">
+                <div class="tp-box" (click)="toggleFlip()" [@flipState]="flip">
+                    <div class="tp-box__side tp-box__front center">
+                        <br> <br> <br>
+                        <br> <br> <br>
+                        <br>&nbsp; int weight = 700;
+                        <br>&nbsp; System.out.println(weight >= 500);
+                        <br><br>&nbsp; char sex = 'm';
+                        <br> &nbsp; System.out.println(sex
+                        <='f' ); <br><br>&nbsp; double colorWaveLength = 1.630;
+                            <br> &nbsp; System.out.println(colorWaveLength > 1.621);
+                    </div>
+                    <div class="tp-box__side tp-box__back text-center">
+                        <br> <br> <br>
+                        <br> <br> <br>
+                        <br> &nbsp; &nbsp; true <br> <br> <br> &nbsp; &nbsp; false <br> <br> <br> &nbsp; &nbsp; true
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="center">
+            <div class="text-style">
+                В Java има четири различни типа данни, които могат да бъдат сравнявани: <br>
             </div>
 
         </div>
 
+
+        <div class="center bolder">
+            <ul>
+                <br>
+                <br>
+                <br>
+
+                <li>
+                    Символи (char)
+
+                </li>
+                <br>
+                <li>
+                    Булеви стойности (boolean)
+
+                </li>
+                <br>
+                <li>
+                    Референции към обекти, познати още като обектни указатели (String, Object и други)
+
+                </li>
+
+                <br>
+                <li>
+                    Числа (int, long, float, double, …)
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="center text-style">
+
+            <br> Всяко едно сравнение може да засегне две числа (включително char), две boolean стойности, или две референции към обекти. По принцип не е забранено да се сравнява символ с число, но това не се препоръчва, защото води до труден за четене
+            и разбиране код.
+
+        </div>
+
+        <div class="center">
+            <div class="bolder borderBox">
+                Сравнение на цели числа и символи
+            </div>
+        </div>
+
+
+        <br> <br> <br>
+        <div class="center">
+
+            <div class="text-style">
+                Нека разгледаме примерен код, за примери за това как се сравняват цели числа и символи в Java
+            </div>
+
+        </div>
+
+        <div class="center">
+
+            <div class="text-style borderBoxWhite">
+
+                <br>
+                <br>&nbsp; System.out.println("char 'a' == 'a'? " + ('a' == 'a'));&nbsp; &nbsp; //&nbsp; char 'a' == 'a'? <span style="color:red">true</span> <br>
+                <br>&nbsp; System.out.println("char 'a' == 'b'? " + ('a' == 'b'));&nbsp; &nbsp; //&nbsp; char 'a' == 'b'? <span style="color:red">false</span><br>
+                <br>&nbsp; System.out.println("5 != 6? " + (5 != 6));&nbsp; &nbsp;&nbsp;&nbsp; //&nbsp; 5 != 6? <span style="color:red">true</span><br>
+                <br>&nbsp; System.out.println("5.0 == 5L? " + (5.0 == 5L));&nbsp; &nbsp;//&nbsp; 5.0 == 5L? <span style="color:red">true</span><br>
+                <br>&nbsp; System.out.println("true == false? " + (true == false));&nbsp; &nbsp;//&nbsp; true == false? <span style="color:red">false</span><br>
+                <br> <br> <br>
+            </div>
+
+        </div>
+
+
+        <div class="center">
+            <div class="bolder borderBox">
+                Сравнение на реални типове
+            </div>
+        </div>
+
+
+        <br> <br> <br>
+        <div class="center">
+
+            <div class="text-style">
+                Нека разгледаме примерен код, за примери за това как се сравняват числа с плаваща запетая в Java
+            </div>
+
+        </div>
+
+        <mat-icon class="floatLeft">priority_high</mat-icon>
+        <div class="hide alignJusify borderBoxWhite">Натисни кутията, за да видиш резултата от кода</div>
+
+        <div class="center">
+
+            <div class="tp-wrapper">
+                <div class="tp-box" (click)="toggleFlip()" [@flipState]="flip">
+                    <div class="tp-box__side tp-box__front center">
+                        <br>
+                        <br> <br> <br>
+                        <br> <br> <br>
+
+                        <br>&nbsp; float value = 1.0f;
+                        <br>&nbsp; System.out.println(value);
+                        <br>&nbsp; float sum = 0.1f + 0.1f + 0.1f + 0.1f + 0.1f + 0.1f + 0.1f + 0.1f + 0.1f + 0.1f;
+                        <br>&nbsp; System.out.println(sum);
+                        <br>&nbsp; System.out.println(sum == value);
+
+                    </div>
+                    <div class="tp-box__side tp-box__back text-center">
+                        <br>
+                        <br>
+                        <br> <br> <br>
+                        <br> <br> <br>
+
+                        <br> &nbsp; &nbsp; 1.0 <br>
+                        <br> &nbsp; &nbsp; 1.0000001 <br>
+                        <br> &nbsp; &nbsp;
+                        <span style="color:red">false</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="center">
+
+            <div class="text-style">
+                Както можем да забележим, ако число с плаваща запетая се сравнява с цяло число, и стойностите и на двете са едни и същи, операторът == връща true (истина), както се и очаква. Това, обаче не винаги работи коректно. Ако погледнем горния пример ще забележим
+                нещо странно!!! <br> <br> Оказва се, сумата от 10 пъти 1/10 не е равно на 1. При работата с реални числа не всяко число има точно представяне в типовете float и double и поради закръглянето се получават грешки. <br> По
+                тази причина често пъти сравнението на реални числа се прави с някаква точност, например 0.000001.
+            </div>
+        </div>
+
+        <div class="center">
+            <div class="bolder borderBox">
+                Логически оператори
+            </div>
+        </div>
+
+        <br> <br> <br> <br> <br>
+        <div class="center">
+            <div class="text-style borderBoxWhite">
+                Логически оператори && и ||
+            </div>
+        </div>
+        <br> <br>
+        <div class="center">
+
+            <div class="text-style">
+                Тези логически оператори се използват само върху boolean стойност. За да бъде резултатът от сравняването на два израза с оператор && true (истина), то и двата операнда трябва да имат стойност true.
+            </div>
+
+        </div>
+
+        <div class="center">
+            <div class="bolder text-style" style="font-size:17px">
+                Операторът && израз е истина, когато и двата операнда са истина. Логическият оператор && се нарича още и съкратен оператор, тъй като той не губи време за допълнителни изчисления. Той изчислява лявата част на израза (първи операнд) и ако резултатът е false,
+                то операторът && не губи време за изчисляването на втория операнд, тъй като е невъзможно крайният резултат да е "истина", ако и двата операнда не са "истина". По тази причина той се нарича още съкратен логически оператор "и". </div>
+        </div>
+
+        <div class="center">
+            <div class="text-style" style="font-size:17px">
+                Операторът || е подобен на && с тази разлика, че той следи поне един от изчисляваните операнди да е "истина". Той се нарича още съкратен логически оператор "или", тъй като ако изчисляването на първия операнд се свежда до "истина", не губи време за изчисление
+                на втория операнд, защото резултатът във всички случаи ще бъде "истина". <br> Ако при изчислението се получи така, че и двата операнда се свеждат до "лъжа", то крайният резултат от сравнението ще бъде "лъжа".
+            </div>
+        </div>
+        <br><br>
+        <div class="center">
+            <div class="text-style borderBoxWhite">
+                Логически оператори & и |
+            </div>
+        </div>
+
+        <div class="center">
+            <div class="text-style" style="font-size:17px">
+                Операторът ^, известен още като изключващо ИЛИ (XOR), се прилага само върху булеви стойности. Той се причислява към несъкратените оператори, поради факта, че изчислява и двата операнда един след друг. Резултатът от прилагането на оператора е истина, когато
+                само и точно един от операндите е истина, но не и двата едновременно. В противен случай резултатът е лъжа.
+            </div>
+        </div>
+        <div class="spaceBetween"></div>
+        <div class="center">
+            <div class="bolder borderBox">
+                Условна конструкция if
+            </div>
+        </div>
+        <br> <br> <br> <br>
+        <div class="center">
+            <div class="text-style borderBoxWhite">
+                if (булев израз)&nbsp;&nbsp; &#10100;<br> <br> тяло на условната конструкция <br> <br> &#x2775;
+            </div>
+        </div>
+        <br><br><br><br>
+        <div class="center">
+            <div class="bolder" style="font-style:italic">
+                Форматът включва: if-клауза, булев израз и тяло на условната конструкция.
+            </div>
+        </div>
+
+        <div class="center">
+            <div class="text-style">
+                <br> Булевият израз може да бъде променлива от булев тип, булев логически израз или релационен израз. Булевият израз не може да бъде цяло число. Тялото е онази част, заключена между големите къдрави скоби. То може да се състои от един
+                или няколко оператора. Когато се състои от няколко оператора, говорим за съставен блоков оператор. Също така в тялото могат да бъдат включвани една или няколко конструкции. <br>
+            </div>
+        </div>
+
+        <div class="center">
+            <div class="text-style borderBoxWhite">
+                <br> int x = 20; <br>
+                <br> int y = 18; <br>
+                <br> if (x > y)&nbsp;&nbsp; &#10100; <br> <br> System.out.println("x is greater than y"); <br> <br> &#x2775;
+                <br>
+            </div>
+        </div>
+        <br> <br> <br> <br>
+        <div class="center">
+            <div class="text-style">
+                В този случай като резултат ще се отпечата следното:
+            </div>
+        </div>
+
+        <br> <br>
+        <div class="center">
+            <div class="text-style borderBoxWhite">
+                x is greater than y
+            </div>
+        </div>
+        <br> <br> <br> <br>
+
+        <div class="center">
+            <div class="bolder borderBox">
+                Условна конструкция if-else
+            </div>
+        </div>
+
+
+        <div class="center">
+            <div class="text-style">
+                Синтаксисът на условната конструкция if-else, можете да погледнете тук:
+            </div>
+        </div>
+
+        <div class="center">
+            <div class="text-style borderBoxWhite">
+                if (булев израз)&nbsp;&nbsp; &#10100;<br> <br> тяло на условната конструкция <br> <br> &#x2775; else &#10100;<br> <br> тяло на else конструкция <br> <br> &#x2775;
+            </div>
+        </div>
+
+
+        <div class="center">
+            <div class="text-style">
+                Форматът включва: запазена дума if, булев израз, тяло на условната конструкция, запазена дума else, тяло на else-конструкция. Тялото на else конструкцията може да се състои от един или няколко оператора. <br> <br> Изчислява се изразът
+                в скобите (булевият израз). Резултатът от изчислението може да бъде сведен до true или false. В зависимост от резултата са възможни два пътя, по които да продължи потока от изчисления
+            </div>
+        </div>
+        <br><br><br><br>
+        <div class="center">
+            <div class="bolder" style="font-style:italic">
+                Нека разгледаме един по-сложен пример, в който използваме вложени if-else конструкции. <br> Натиснете картината, за да видите примерни входове и техния резултат спрямо условията.
+            </div>
+        </div>
+
+        <div class="center">
+            <div class="tp-wrapper">
+                <div class="tp-box" (click)="toggleFlip()" [@flipState]="flip">
+                    <div class="tp-box__side tp-box__front">
+                        <br>&nbsp;&nbsp; Scanner input = new Scanner(System.in); <br>
+                        <br>&nbsp;&nbsp; System.out.println(<br>&nbsp;&nbsp;"Моля въведете две числа на отделни редове.");<br>
+                        <br>&nbsp;&nbsp; int first = input.nextInt();<br>
+                        <br>&nbsp;&nbsp; int second = input.nextInt();<br>
+                        <br>&nbsp;&nbsp; if (first == second)&nbsp;&nbsp; &#10100; <br>&nbsp;&nbsp;<br>&nbsp;&nbsp; System.out.println("Двете числа са равни"); <br> <br>&nbsp;&nbsp; &#x2775; else &#10100;<br> <br>&nbsp;&nbsp; if(first > second)&nbsp;&nbsp;
+                        &#10100;
+                        <br>
+                        <br>&nbsp;&nbsp; System.out.println("Първото число е по-голямо");
+                        <br> <br>&nbsp;&nbsp; &#x2775;
+                    </div>
+
+                    <div class="tp-box__side tp-box__back text-center">
+                        <br> <br>
+                        <br> &nbsp; &nbsp; Моля въведете две числа на отделни редове. <br>
+                        <br> &nbsp; &nbsp; 2 <br>
+                        <br> &nbsp; &nbsp; 2 <br>
+                        <br>&nbsp; &nbsp;<span style="color:red">Двете числа са равни</span> &nbsp; &nbsp; <br>&nbsp; &nbsp; <br><br>&nbsp; &nbsp;&nbsp; &nbsp; ----------------------------------------------------------------------------------------------
+                        <br>
+
+
+                        <br> &nbsp; &nbsp; Моля въведете две числа на отделни редове. <br>
+                        <br> &nbsp; &nbsp; 3 <br>
+                        <br> &nbsp; &nbsp; 2 <br>
+                        <br>&nbsp; &nbsp; <span style="color:red">Първото число е по-голямо</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
     </div>
 
 

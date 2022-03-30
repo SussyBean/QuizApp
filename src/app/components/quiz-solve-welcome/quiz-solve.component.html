@@ -10,9 +10,8 @@
             <h2 class=" fs-4 subTitle">Правила:</h2>
             <ol class="listStyle">
                 <li>- Всеки въпрос трае 60 секунди.</li><br>
-                <li>- За всеки неправилно отговорен въпрос се отнемат 10 точки.</li><br>
                 <li>- За всеки правилно отговорен въпрос получавате по 10 точки.</li><br>
-                <li>- При натискане на бутона за опресняване, ще се рестарира целия тест.</li><br>
+                <li>- При натискане на бутона за опресняване,можете да започнете теста отначало</li><br>
             </ol>
 
             <div class="spaceBetween"></div>
@@ -26,55 +25,100 @@
 
     <div class="spaceBetween"></div>
 
+    <div class="center">
+        <div class="content" style="padding-top: 96px !important;" *ngIf="!isLoading">
 
-    <div class="content margin" style="padding-top: 96px !important;" *ngIf="!isLoading">
-
-        <table mat-table [dataSource]="quizes" class="mat-elevation-z8" style="width: 100%;">
-
-
-            <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef> Име на теста </th>
-                <div class="position">
-                    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-                </div>
-            </ng-container>
-
-            <ng-container matColumnDef="description">
-                <th mat-header-cell *matHeaderCellDef> Описание на теста </th>
-                <td mat-cell *matCellDef="let element"> {{element.description}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="languages">
-                <th mat-header-cell *matHeaderCellDef> Тематични програмни езици </th>
-                <td mat-cell *matCellDef="let element"> {{element.languages}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="creators">
-                <th mat-header-cell *matHeaderCellDef> Създател на теста </th>
-                <td mat-cell *matCellDef="let element"> {{element.languages}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="button">
-                <th mat-header-cell *matHeaderCellDef></th>
-                <td mat-cell *matCellDef="let element">
-                    <div class="toPosition">
-                        <button mat-raised-button color="primary" routerLink="/quizes/{{element.id}}">Реши</button>
-                        <ng-container *ngIf="authService.isCurrentUserAdmin()">
-                            <br> <br>
-                            <button mat-raised-button color="warn" (click)="deleteQuiz(element)">Изтрий</button>
-                        </ng-container>
-
-                    </div>
-
-                </td>
-            </ng-container>
+            <table mat-table [dataSource]="quizes" class="mat-elevation-z8" style="width: 100%;">
 
 
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef>
+                        <div style="text-align:center">
+                            Име на теста
+                        </div>
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                        <div class="alignJustifyTitles">
+                            {{element.name}}
+                        </div>
+                    </td>
 
+                </ng-container>
+
+                <ng-container matColumnDef="description">
+                    <th mat-header-cell *matHeaderCellDef>
+                        <div style="text-align:center">
+                            Описание на теста
+                        </div>
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                        <div class="alignJustifyDescription">
+                            {{element.description}}
+                        </div>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="languages">
+                    <th mat-header-cell *matHeaderCellDef>
+                        <div class="margin" style="text-align:center">
+                            Тематични програмни езици
+                        </div>
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                        <div class="margin" style="text-align:center">
+                            {{element.languages}}
+                        </div>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="creators">
+                    <th mat-header-cell *matHeaderCellDef>
+                        <div class="margin">
+                            Създател на теста
+                        </div>
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                        <div>
+                            {{element.languages}}
+                        </div>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="numberOfQuestions">
+                    <th mat-header-cell *matHeaderCellDef>
+                        <div class="margin" style="text-align:center">
+                            Брой въпроси
+                        </div>
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                        <div class="margin" style="text-align:center">
+                            {{element.numberOfQuestions}}
+                        </div>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="button">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let element">
+                        <div class="toPosition">
+                            <button mat-raised-button color="primary" routerLink="/quizes/{{element.id}}">Реши</button>
+                            <ng-container *ngIf="authService.isCurrentUserAdmin()">
+                                <br> <br>
+                                <button mat-raised-button color="warn" (click)="deleteQuiz(element)">Изтрий</button>
+                            </ng-container>
+                        </div>
+
+                    </td>
+                </ng-container>
+
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+        </div>
     </div>
+
 
     <div class="spaceBetween"></div>
 

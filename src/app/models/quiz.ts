@@ -1,7 +1,7 @@
 import { JsonObjectExpression } from "typescript";
 
 export interface QuizModel{
-  id?:string;
+   id?:string;
    uid:string;
    name: string,
    quiz:string[];

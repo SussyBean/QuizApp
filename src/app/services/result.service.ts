@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {
   addDoc,
   collection,
+  deleteDoc,
   doc,
   Firestore,
   getDocs,
@@ -33,4 +34,12 @@ export class ResultService {
       ];
     });
   }
+
+
+  deleteResult(result: ResultModel) : Observable<any>{
+  const ref=doc(this.firestore,'results', <string> result?.rid);
+  return from(deleteDoc(ref));
+}
+
+
 }
